@@ -1,0 +1,25 @@
+from repositories.book_repository import BookRepository
+
+
+class bookCitation:
+    def __init__(self) -> None:
+        self.repo = BookRepository()
+
+    def save_citation(self, id, author, title, year, publisher):
+        """ Save book to repository """
+
+        if id and author and title and year and publisher:
+            book = {
+            "id": id,
+            "author": author,
+            "title": title,
+            "year": year,
+            "publisher": publisher
+            }
+            self.repo.add_book(book)
+            return True
+        return False
+    
+    def get_all(self):
+        """ Return list of all books """
+        return self.repo.get_books()
