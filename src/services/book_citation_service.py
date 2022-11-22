@@ -1,4 +1,3 @@
-from flask import requests
 from repositories.book_repository import BookRepository
 
 
@@ -6,12 +5,7 @@ class bookCitation:
     def __init__(self) -> None:
         self.repo = BookRepository()
 
-    def save_citation(self, citation):
-        id = request.form["id"]
-        author = request.form["author"]
-        title = request.form["title"]
-        year = request.form["year"]
-        publisher = request.form["publisher"]
+    def save_citation(self, id, author, title, year, publisher):
 
         if id and author and title and year and publisher:
             book = {
