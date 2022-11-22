@@ -1,8 +1,11 @@
-from urllib import request
 from flask import requests
+from repositories.book_repository import BookRepository
 
 
 class bookCitation:
+    def __init__(self) -> None:
+        self.repo = BookRepository()
+
     def save_citation(self, citation):
         author = request.form["author"]
         title = request.form["title"]
@@ -10,8 +13,13 @@ class bookCitation:
         publisher = request.form["publisher"]
 
         if author and title and year and publisher:
-            # Lähetä eteenpäin
-            pass
+            book = {
+            "author": author,
+            "title": title,
+            "year": year,
+            "publisher": publisher
+        }
+            self.repo.add_book(book)
     
     def get_all(self):
-        pass
+        return self.repo.get_books()
