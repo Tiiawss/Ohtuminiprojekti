@@ -14,8 +14,10 @@ class bookCitation:
             "title": title,
             "year": year,
             "publisher": publisher
-        }
+            }
             self.repo.add_book(book)
+            return True
+        return False
     
     def get_all(self):
         return self.repo.get_books()
