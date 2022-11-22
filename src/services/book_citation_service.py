@@ -24,3 +24,4 @@ class BookCitation:
     def get_all(self):
         """ Return list of all books """
         return self.repo.get_books()
+book_service = BookCitation(book_repository)
