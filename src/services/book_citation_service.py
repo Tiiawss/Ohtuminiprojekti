@@ -7,13 +7,15 @@ class bookCitation:
         self.repo = BookRepository()
 
     def save_citation(self, citation):
+        id = request.form["id"]
         author = request.form["author"]
         title = request.form["title"]
         year = request.form["year"]
         publisher = request.form["publisher"]
 
-        if author and title and year and publisher:
+        if id and author and title and year and publisher:
             book = {
+            "id": id,
             "author": author,
             "title": title,
             "year": year,
