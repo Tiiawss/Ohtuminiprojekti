@@ -11,7 +11,7 @@ class BookCitation:
 
         if bookid and author and title and year and publisher:
             book = {
-            "id": bookid,
+            "reference": bookid,
             "author": author,
             "title": title,
             "year": year,
@@ -24,3 +24,4 @@ class BookCitation:
     def get_all(self):
         """ Return list of all books """
         return self.repo.get_books()
+book_service = BookCitation(book_repository)
