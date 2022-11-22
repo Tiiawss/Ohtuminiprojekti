@@ -21,3 +21,4 @@ class BookRepository:
             list: _description_
         """
         return self.books
+book_repository = BookRepository()
