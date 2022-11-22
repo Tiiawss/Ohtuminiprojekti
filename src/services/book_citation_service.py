@@ -12,3 +12,6 @@ class bookCitation:
         if author and title and year and publisher:
             # Lähetä eteenpäin
             pass
+    
+    def get_all(self):
+        pass
