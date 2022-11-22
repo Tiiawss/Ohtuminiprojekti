@@ -24,4 +24,13 @@ class BookCitation:
     def get_all(self):
         """ Return list of all books """
         return self.repo.get_books()
+
+    def get_last(self):
+        """ Return last element of books
+        """
+        books = self.repo.get_books()
+        if len(books) > 0:
+            return books[-1]
+        return None
+
 book_service = BookCitation(book_repository)
