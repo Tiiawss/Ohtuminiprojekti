@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <h1>Kaikki viittaukset</h1>
+        <ul>
+            {% for citation in citations %}
+            <li> {{ citation.reference }} </li>
+            <ul>
+                {% for key, value in citation.items() %}
+                    {% if key != "reference" %}
+                        <li> {{ value }} </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            {% endfor %}
+        </ul>
+    </body>
+</html>

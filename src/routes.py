@@ -23,20 +23,5 @@ def view_all_citations():
 
     return render_template(
         "citations.html",
-        citations = [{
-            "id": "nro 1",
-            "author": "author1",
-            "title": "title1",
-            "year": "1",
-            "publisher": "publisher1"
-        },
-        {
-            "id": "bookid2",
-            "author": "author2",
-            "title": "title2",
-            "year": "year2",
-            "publisher": "publisher2"
-        }
-        ]
-        #citations = book_service.get_all()
+        citations = book_service.get_all()
     )
