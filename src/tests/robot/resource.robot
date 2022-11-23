@@ -17,3 +17,5 @@ Open And Configure Browser
 Home Page Should Be Open
     Title Should Be  Etusivu
 
+Go To Home Page
+    Go To  ${HOME URL}
