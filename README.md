@@ -13,6 +13,8 @@ Definition of done user storyille:
 Projektin Backlogi:
 [Backlog](https://docs.google.com/spreadsheets/d/1Bpj_Jj_M1JV9w9xzCZbB7l4bdEwWCzu1R7Us-KIqYqY/edit?usp=sharing)
 
+## Dokumentaatio
 
+![Käyttöohje](dokumentaatio/kayttoohje.md)
 
 
