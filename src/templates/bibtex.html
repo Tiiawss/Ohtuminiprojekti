@@ -5,12 +5,12 @@
     </head>
     <body>
         {% for citation in bibtex %}
-        {{ citation.Citekey }}<br>
-        <text style="margin-left: 40px;">{{ citation.Author }}</text><br>
-        <text style="margin-left: 40px;">{{ citation.Title }}</text><br>
-        <text style="margin-left: 40px;">{{ citation.Year }}</text><br>
-        <text style="margin-left: 40px;">{{ citation.Publisher }}</text><br>
-        {{ citation.Last }}<br>
+<pre>{{ citation.Citekey }}
+    {{ citation.Author }}
+    {{ citation.Title }}
+    {{ citation.Year }}
+    {{ citation.Publisher }}
+{{ citation.Last }}</pre>
         {% endfor %}
     </body>
 </html>
