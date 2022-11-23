@@ -10,6 +10,9 @@ python = "^3.8"
 Flask = "^2.2.2"
 invoke = "^1.7.3"
 coverage = "^6.5.0"
+robotframework = "^6.0.1"
+robotframework-seleniumlibrary = "^6.0.0"
+requests = "^2.28.1"
 
 
 [tool.poetry.group.dev.dependencies]

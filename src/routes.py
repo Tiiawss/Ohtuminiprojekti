@@ -1,6 +1,7 @@
 from flask import redirect, render_template, request
 from app import app
 from services.book_citation_service import book_service
+from services.bibtex_service import BibTexService
 
 @app.route("/")
 def index():
@@ -26,3 +27,13 @@ def view_all_citations():
         "citations.html",
         citations = book_service.get_all()
     )
+
+@app.route("/bibtex")
+def generate_bibtex():
+    bibtex_service = BibTexService()
+
+    bibtex_service.turn_books_to_bibtex()
+
+    bibtex = bibtex_service.get_bibtex()
+
+    return render_template("bibtex.html", bibtex=bibtex)
