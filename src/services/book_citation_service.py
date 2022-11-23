@@ -26,7 +26,7 @@ class BookCitation:
             """
             for book in self.get_all():
                 if book['reference'] == citekey:
-                    get_unique_from(
+                    return get_unique_from(
                         f"{citekey}{random.choice(string.ascii_lowercase)}"
                     )
             return citekey
@@ -39,7 +39,7 @@ class BookCitation:
             if character in string.ascii_letters:
                 citekey += character
 
-        for i, digit_string, in enumerate(year):
+        for i, digit_string in enumerate(year):
             if i >= 5:
                 break
             if digit_string in string.digits:
