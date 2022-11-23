@@ -1,4 +1,5 @@
-import random, string
+import random
+import string
 from repositories.book_repository import book_repository
 
 
@@ -11,8 +12,8 @@ class BookCitation:
         """Returns unique citeky based on author and year
 
         Args:
-            author (str): 
-            year (str): 
+            author (str):
+            year (str):
 
         Returns:
             str: unique citekey
@@ -33,25 +34,25 @@ class BookCitation:
         citekey = ""
 
         for i, character in enumerate(author):
-            if i >=6: break
+            if i >=6:
+                break
             if character in string.ascii_letters:
                 citekey += character
 
         for i, digit_string, in enumerate(year):
-            if i >= 5: break
+            if i >= 5:
+                break
             if digit_string in string.digits:
                 citekey += digit_string
 
         return get_unique_from(citekey)
-         
-        
 
     def save_citation(self, author, title, year, publisher):
         """ Save book to repository """
 
         if author and title and year and publisher:
             book = {
-            "reference": 
+            "reference":
                 self._get_unique_cite_key(author,year),
             "author": author,
             "title": title,
@@ -73,7 +74,5 @@ class BookCitation:
         if len(books) > 0:
             return books[-1]
         return None
-    
-        
 
 book_service = BookCitation(book_repository)
