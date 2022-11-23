@@ -17,7 +17,7 @@ def create():
     title = request.form["title"]
     year = request.form["year"]
     publisher = request.form["publisher"]
-    book_service.save_citation("1", author_name, title, year, publisher)
+    book_service.save_citation(author_name, title, year, publisher)
     return redirect("/")
 
 @app.route("/all")
