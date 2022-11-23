@@ -10,6 +10,7 @@ Definition of done user storyille:
 ![GHA workflow badge](https://github.com/Tiiawss/Ohtuminiprojekti/workflows/CI/badge.svg)
 [![codecov](https://codecov.io/gh/Tiiawss/Ohtuminiprojekti/branch/main/graph/badge.svg?token=HLHGkP7oag)](https://codecov.io/gh/Tiiawss/Ohtuminiprojekti)
 
+Projektin Backlogi:
 [Backlog](https://docs.google.com/spreadsheets/d/1Bpj_Jj_M1JV9w9xzCZbB7l4bdEwWCzu1R7Us-KIqYqY/edit?usp=sharing)
 
 
