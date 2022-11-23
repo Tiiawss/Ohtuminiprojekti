@@ -44,6 +44,9 @@ class TestBookRepository(unittest.TestCase):
         )
 
         books = self.book_repository.get_books()
+        
 
         self.assertEqual(len(books), 2)
         self.assertEqual(books[0]["id"], "1")
+
+    
