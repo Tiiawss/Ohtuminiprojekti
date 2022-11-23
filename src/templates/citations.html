@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title></title>
+        <title>Kaikki Viitteet</title>
     </head>
     <body>
         <h1>Kaikki viittaukset</h1>
@@ -11,7 +11,7 @@
             <ul>
                 {% for key, value in citation.items() %}
                     {% if key != "reference" %}
-                        <li> {{ value }} </li>
+                        <li id="{{ citation.reference }}-{{key}}"> {{ value }} </li>
                     {% endif %}
                 {% endfor %}
             </ul>
