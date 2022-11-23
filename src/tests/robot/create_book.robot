@@ -9,6 +9,25 @@ Test Setup  Go To Form Page
 Form Page Is Open
     Form Page Should Be Open
 
+Create Book With Correct Values
+    Set Input Field  author  pekka
+    Set Input Field  title  titteli
+    Set Input Field  year  vuosi
+    Set Input Field  publisher  julkaisija
+    Submit Form
+    Home Page Should Be Open
+
+Show Last Citation In Home Page
+    Set Input Field  author  matti
+    Set Input Field  title  titteli
+    Set Input Field  year  vuosi
+    Set Input Field  publisher  julkaisija
+    Submit Form
+    Page Should Contain  matti
+    Page Should Contain  titteli
+    Page Should Contain  vuosi
+    Page Should Contain  julkaisija
+
 Last Book Is In All
     Set Input Field  author  pekka
     Set Input Field  title  titteli
@@ -29,26 +48,12 @@ Last Book Is In All
     ${author}  Get Text  id:${citekey}-publisher
     Should Be Equal  ${author}  julkaisija
 
-
-
-Create Book With Correct Values
-    Set Input Field  author  pekka
+Create Book With Missing Author
     Set Input Field  title  titteli
     Set Input Field  year  vuosi
     Set Input Field  publisher  julkaisija
     Submit Form
-    Home Page Should Be Open
-
-Show Last Citation In Home Page
-    Set Input Field  author  matti
-    Set Input Field  title  titteli
-    Set Input Field  year  vuosi
-    Set Input Field  publisher  julkaisija
-    Submit Form
-    Page Should Contain  matti
-    Page Should Contain  titteli
-    Page Should Contain  vuosi
-    Page Should Contain  julkaisija
+    Form Page Should Be Open
 
 *** Keyword ***
 
