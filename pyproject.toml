@@ -8,6 +8,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.8"
 Flask = "^2.2.2"
+invoke = "^1.7.3"
 
 
 [tool.poetry.group.dev.dependencies]
