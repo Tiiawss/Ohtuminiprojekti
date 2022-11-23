@@ -7,3 +7,5 @@ Definition of done user storyille:
 - Käyttäjä pystyy käyttämään kirjattujen hyväksymiskriteerien puitteissa
 - Story on lisätty mainiin
 
+![GHA workflow badge](https://github.com/Tiiawss/Ohtuminiprojekti/workflows/CI/badge.svg)
+
