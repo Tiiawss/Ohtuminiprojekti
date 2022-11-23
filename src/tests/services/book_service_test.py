@@ -84,3 +84,24 @@ class TestBookService(unittest.TestCase):
             self.book_service.get_all()[0]["reference"],
             self.book_service.get_all()[1]["reference"]
         )
+
+    def test_get_last(self):
+        self.book_service.save_citation(
+            "joku",
+            "Teeskentelyä",
+            "2022",
+            "Paras"
+        )
+        self.book_service.save_citation(
+            "joku",
+            "Teeskentelyä",
+            "2022",
+            "Paras"
+        )
+        
+        book = self.book_service.get_last()
+        self.assertEqual(
+            book,
+            self.book_service.get_all()[-1]
+        )
+
