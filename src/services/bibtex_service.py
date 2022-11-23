@@ -22,7 +22,7 @@ class BibTexService:
 
         for book in books:
             citekey = "@Book{" + book["reference"] + ","
-            author = f'{"author"} = " {book["author"]} ",'
+            author = f'{"author"} = "{book["author"]}",'
             title = 'title = "' + book["title"] + '",'
             year = 'year = "' + book["year"] + '",'
             publisher = 'publisher = "' + book["publisher"] + '"'
