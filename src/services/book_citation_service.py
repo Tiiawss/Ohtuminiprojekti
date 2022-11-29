@@ -51,7 +51,7 @@ class BookCitation:
     def save_citation(self, author, title, year, publisher):
         """ Save book to repository """
 
-        if author and title and year and publisher:
+        if author.strip() and title.strip() and year.strip() and publisher.strip():
             book = {
             "reference":
                 self._get_unique_cite_key(author,year),
