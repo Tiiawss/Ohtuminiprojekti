@@ -14,6 +14,17 @@ class StudBookRepo:
     def get_books(self) -> list:
         return self.books
 
+    def remove_book(self, cite_key) -> bool:
+        """Removes one book"""
+        index_to_remove = -1
+        for index, element in enumerate(self.books):
+            if element["cite_key"] == cite_key:
+                index_to_remove = index
+        if index_to_remove != -1:
+            self.books.pop(index_to_remove)
+            return True
+        return False
+
 
 class TestBookService(unittest.TestCase):
     def setUp(self):
@@ -106,3 +117,20 @@ class TestBookService(unittest.TestCase):
             book,
             self.book_service.get_all()[-1]
         )
+
+    def test_remove_citation(self):
+        self.book_service.save_citation(
+            "Pek Pekka",
+            "Pekan seikkalut",
+            "20",
+            "Oma kustannus"
+        )
+        self.book_service.save_citation(
+            "Pek Pekka P",
+            "Pekan seikkalut 2",
+            "20",
+            "Oma kustannus"
+        )
+
+        citekey = self.book_service.get_all()[0]['cite_key']
+        self.book_service.remove_citation(citekey)
