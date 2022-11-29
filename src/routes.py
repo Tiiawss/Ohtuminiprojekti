@@ -17,10 +17,10 @@ def form():
     """
     cites = configuration_repository.get_cites()
     cite_types = []
-    for keys in cites.keys():
+    for keys in cites:
         cite_types.append(keys)
-    if request.method == "GET":    
-        return render_template("form.html", types=cite_types) 
+    if request.method == "GET":
+        return render_template("form.html", types=cite_types)
     required_fields = []
     optional_fields = []
     typ = request.form.get("types")
