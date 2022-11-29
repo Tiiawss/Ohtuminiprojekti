@@ -1,6 +1,7 @@
 class BookRepository:
     """ Repository for saving bookreferences
     """
+
     def __init__(self):
         self.books = []
 
@@ -32,5 +33,6 @@ class BookRepository:
             self.books.pop(index_to_remove)
             return True
         return False
+
 
 book_repository = BookRepository()

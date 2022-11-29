@@ -20,3 +20,8 @@ def test(ctx):
 @task
 def coverage(ctx):
     ctx.run("coverage run --branch -m pytest src; coverage html", pty=True)
+
+
+@task
+def format(ctx):
+    ctx.run('autopep8 --in-place --recursive src --exclude="app.py"')
