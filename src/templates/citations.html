@@ -8,8 +8,13 @@
         <ul>
             {% for citation in citations %}
             <li> {{ citation.reference }} </li>
+            <form action="/remove" method="POST">
+                    <input type="hidden" name="id" value="{{ citation.reference }}">
+                    <input type="submit" value="Poista viittaus">
+                </form>
             <ul>
                 {% for key, value in citation.items() %}
+                
                     {% if key != "reference" %}
                         <li id="{{ citation.reference }}-{{key}}"> {{ value }} </li>
                     {% endif %}
