@@ -1,16 +1,43 @@
 <head>
     <title>Lisää Viite</title>
 </head>
-<form action="/create" method="POST">
-    <p>Kirjailijan nimi:</p>
-    <input type="text" id="author" name="author" required></p>
-    <p>Kirjan nimi:</p>
-    <input type="text" id="title" name="title" required></p>
-    <p>Kirjan julkaisuvuosi:</p>
-    <input type="text" id="year" name="year" required></p>
-    <p>Kirjan julkaisja:</p>
-    <input type="text" id="publisher" name="publisher" required></p>
-    <input type="submit" value="Luo viite">
+<body>
+    
 
 
-</form>
+    <form action="/form" method="POST">
+        <label for="types">Valitse viitetyyppi:</label>
+        <select name="types" id="types" form="">
+            {% for type in types %}
+            <option value="{{ type[0] }}">{{ type[1] }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Valitse">
+    </form>
+
+    <form action="/create" method="POST">
+        <p>Pakolliset kentät</p>
+        {% for field in required_fields %}
+        <label for="{{ field[0] }}">{{ field[1] }}</label>
+        <input type="text", id="{{ field[0] }}" name="{{ field[0] }}" placeholder="pakollinen kenttä" required>
+        {% endfor %}
+        <p>Valinnaiset kentät</p>
+        {% for field in optional_fields %}
+        <label for="{{ field[0] }}">{{ field[1] }}</label>
+        <input type="text", id="{{ field[0] }}" name="{{ field[0] }}">
+        {% endfor %}
+        <input id="submit-button" type="submit" value="Luo viite">
+    </form>
+
+    <style>
+        label {
+            display: block;
+            padding-bottom: 2px;
+            padding-top: 4px;
+        }
+
+        #submit-button {
+            display: block;
+        }
+    </style>
+</body>

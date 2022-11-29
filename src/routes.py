@@ -10,12 +10,20 @@ def index():
 
     return render_template("index.html", book=book_service.get_last())
 
-@app.route("/form")
+@app.route("/form", methods=["GET", "POST"])
 def form():
     """Avaa lomakkeen, johon täytetään lähdeviitaus
     """
-
-    return render_template("form.html")
+    cite_types = [("book", "kirja"), ("article", " artikkeli"), ("movie", "leffa")]
+    required_fields = [("author", "kirjailija"), ("title", "Kirjan nimi"),
+        ("year", "Julkaisuvuosi"), ("publisher", "Julkaisija")]
+    optional_fields = [("wert", "areg"), ("argr", "eraij")]
+    if request.method == "POST":
+        return render_template("form.html",
+            types = cite_types,
+            required_fields = required_fields,
+            optional_fields = optional_fields)
+    return render_template("form.html", types=cite_types)
 
 @app.route("/create", methods=["POST"])
 def create():
