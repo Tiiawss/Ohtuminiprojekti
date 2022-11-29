@@ -1,5 +1,6 @@
 import toml
 
+
 class ConfigurationRepository:
     """Luokka, joka hakee sovellusta varten tiedot lähdeviittausten kentistä
     """
@@ -35,5 +36,6 @@ class ConfigurationRepository:
         """
 
         return self._cites
+
 
 configuration_repository = ConfigurationRepository()

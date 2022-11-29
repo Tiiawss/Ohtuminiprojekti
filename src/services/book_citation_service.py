@@ -5,10 +5,11 @@ from repositories.book_repository import book_repository
 
 class BookCitation:
     """ Book Service """
-    def __init__(self, bookrepository = book_repository) -> None:
+
+    def __init__(self, bookrepository=book_repository) -> None:
         self.repo = bookrepository
 
-    def _get_unique_cite_key(self, author :str, year :str) -> str:
+    def _get_unique_cite_key(self, author: str, year: str) -> str:
         """ Returns unique citeky based on author and year
 
         Args:
@@ -19,14 +20,14 @@ class BookCitation:
             str: unique citekey
         """
 
-        def get_unique_from(citekey :str):
+        def get_unique_from(citekey: str):
             """ Appends ascii_letters to citeky until unique
 
             Returns:
                 str: unique citekey
             """
             for book in self.get_all():
-                if book['reference'] == citekey:
+                if book['cite_key'] == citekey:
                     return get_unique_from(
                         f"{citekey}{random.choice(string.ascii_lowercase)}"
                     )
@@ -35,7 +36,7 @@ class BookCitation:
         citekey = ""
 
         for i, character in enumerate(author):
-            if i >=6:
+            if i >= 6:
                 break
             if character in string.ascii_letters:
                 citekey += character
@@ -53,12 +54,12 @@ class BookCitation:
 
         if author.strip() and title.strip() and year.strip() and publisher.strip():
             book = {
-            "reference":
-                self._get_unique_cite_key(author,year),
-            "author": author,
-            "title": title,
-            "year": year,
-            "publisher": publisher
+                "cite_key":
+                self._get_unique_cite_key(author, year),
+                "author": author,
+                "title": title,
+                "year": year,
+                "publisher": publisher
             }
             self.repo.add_book(book)
             return True
@@ -76,7 +77,7 @@ class BookCitation:
             return books[-1]
         return None
 
-    def remove_citation(self, id: str) -> bool:
+    def remove_citation(self, cite_key: str) -> bool:
         """Remove citation. True for success false for fail.
 
         Args:
@@ -85,7 +86,7 @@ class BookCitation:
         Returns:
             bool:
         """
-        return book_repository.remove_book(id)
-        
+        return book_repository.remove_book(cite_key)
+
 
 book_service = BookCitation(book_repository)
