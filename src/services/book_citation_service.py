@@ -86,7 +86,8 @@ class BookCitation:
         Returns:
             bool:
         """
-        return book_repository.remove_book(cite_key)
+
+        return self.repo.remove_book(cite_key)
 
 
 book_service = BookCitation(book_repository)
