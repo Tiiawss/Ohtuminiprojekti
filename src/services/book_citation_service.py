@@ -9,7 +9,7 @@ class BookCitation:
         self.repo = bookrepository
 
     def _get_unique_cite_key(self, author :str, year :str) -> str:
-        """Returns unique citeky based on author and year
+        """ Returns unique citeky based on author and year
 
         Args:
             author (str):
@@ -18,6 +18,7 @@ class BookCitation:
         Returns:
             str: unique citekey
         """
+
         def get_unique_from(citekey :str):
             """ Appends ascii_letters to citeky until unique
 
@@ -74,5 +75,17 @@ class BookCitation:
         if len(books) > 0:
             return books[-1]
         return None
+
+    def remove_citation(self, id: str) -> bool:
+        """Remove citation. True for success false for fail.
+
+        Args:
+            id (str):
+
+        Returns:
+            bool:
+        """
+        return book_repository.remove_book(id)
+        
 
 book_service = BookCitation(book_repository)

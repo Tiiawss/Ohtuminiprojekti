@@ -57,6 +57,13 @@ def view_all_citations():
         "citations.html",
         citations = book_service.get_all()
     )
+    
+@app.route("/remove",methods=["POST"])
+def remove_citation():
+    citation_key = request.form["id"]
+    book_service.remove_citation(citation_key)
+    return redirect("/")
+    
 
 @app.route("/bibtex")
 def generate_bibtex():
