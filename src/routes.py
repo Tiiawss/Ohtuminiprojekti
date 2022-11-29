@@ -2,6 +2,7 @@ from flask import redirect, render_template, request
 from app import app
 from services.book_citation_service import book_service
 from services.bibtex_service import BibTexService
+from repositories.configuration_repository import configuration_repository
 
 @app.route("/")
 def index():
@@ -15,7 +16,12 @@ def form():
     """Avaa lomakkeen, johon täytetään lähdeviitaus
     """
 
-    return render_template("form.html")
+    cite_types = configuration_repository.get_cites()
+    types = []
+    for keys in cite_types.keys():
+        types.append(keys)
+    cite_fields = cite_types['Book']
+    return render_template("form.html", types=types, cite_fields=cite_fields)
 
 @app.route("/create", methods=["POST"])
 def create():

@@ -7,7 +7,7 @@ class ConfigurationRepository:
     def __init__(self) -> None:
         """Alustaa luokan 
         """
-        
+
         self._cites = {}
         self.cites_fields()
 
@@ -28,6 +28,7 @@ class ConfigurationRepository:
             for field, values in fields.items():
                 self._cites[typ][field] = (values[0], bool(values[1]))
 
-        print(self._cites)
+    def get_cites(self):
+        return self._cites
 
 configuration_repository = ConfigurationRepository()
