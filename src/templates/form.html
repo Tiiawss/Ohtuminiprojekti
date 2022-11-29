@@ -1,15 +1,12 @@
 <head>
-    <title>Lisää Viite</title>
+    <title>Lisää Viite {{ types[0] }}</title>
 </head>
 <body>
-    
-
-
     <form action="/form" method="POST">
         <label for="types">Valitse viitetyyppi:</label>
-        <select name="types" id="types" form="">
+        <select name="types" onchange="this.form.submit()">
             {% for type in types %}
-            <option value="{{ type[0] }}">{{ type[1] }}</option>
+            <option value="{{ type }}">{{ type }}</option>
             {% endfor %}
         </select>
         <input type="submit" value="Valitse">

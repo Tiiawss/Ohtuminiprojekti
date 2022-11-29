@@ -1,0 +1,5 @@
+[Book]
+author = ["Kirjailija", "True"]
+title = ["Kirjan nimi", "True"]
+year = ["Kirjan julkaisuvuosi", "True"]
+publisher = ["Kirjan julkaisija", "True"]

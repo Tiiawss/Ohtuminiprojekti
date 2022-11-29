@@ -2,6 +2,7 @@ from flask import redirect, render_template, request
 from app import app
 from services.book_citation_service import book_service
 from services.bibtex_service import BibTexService
+from repositories.configuration_repository import configuration_repository
 
 @app.route("/")
 def index():
@@ -14,16 +15,25 @@ def index():
 def form():
     """Avaa lomakkeen, johon täytetään lähdeviitaus
     """
-    cite_types = [("book", "kirja"), ("article", " artikkeli"), ("movie", "leffa")]
-    required_fields = [("author", "kirjailija"), ("title", "Kirjan nimi"),
-        ("year", "Julkaisuvuosi"), ("publisher", "Julkaisija")]
-    optional_fields = [("wert", "areg"), ("argr", "eraij")]
-    if request.method == "POST":
-        return render_template("form.html",
-            types = cite_types,
-            required_fields = required_fields,
-            optional_fields = optional_fields)
-    return render_template("form.html", types=cite_types)
+    cites = configuration_repository.get_cites()
+    cite_types = []
+    for keys in cites:
+        cite_types.append(keys)
+    if request.method == "GET":
+        return render_template("form.html", types=cite_types)
+    required_fields = []
+    optional_fields = []
+    typ = request.form.get("types")
+    for key, values in cites[typ].items():
+        if values[1]:
+            required_fields.append((key, values[0]))
+        else:
+            optional_fields.append((key, values[0]))
+    return render_template("form.html",
+        types = cite_types,
+        required_fields = required_fields,
+        optional_fields = optional_fields
+    )
 
 @app.route("/create", methods=["POST"])
 def create():
