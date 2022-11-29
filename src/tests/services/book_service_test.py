@@ -60,7 +60,7 @@ class TestBookService(unittest.TestCase):
             "pekan omakustanne"
         )
         for book in self.book_service.get_all():
-            for character in book["reference"]:
+            for character in book["cite_key"]:
                 self.assertEqual(
                     character in string.ascii_letters or character in string.digits,
                     True
@@ -81,8 +81,8 @@ class TestBookService(unittest.TestCase):
             "pekan omakustanne"
         )
         self.assertNotEqual(
-            self.book_service.get_all()[0]["reference"],
-            self.book_service.get_all()[1]["reference"]
+            self.book_service.get_all()[0]["cite_key"],
+            self.book_service.get_all()[1]["cite_key"]
         )
 
     def test_get_last(self):
