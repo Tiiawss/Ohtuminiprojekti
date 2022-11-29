@@ -33,7 +33,7 @@ class TestBookService(unittest.TestCase):
 
     def test_does_not_save_incorrect_citation(self):
         re = self.book_service.save_citation(
-                None,
+                "",
                 "Teeskentelyä",
                 "2022",
                 "Paras"
