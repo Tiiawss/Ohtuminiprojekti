@@ -11,17 +11,29 @@ def index():
 
     return render_template("index.html", book=book_service.get_last())
 
-@app.route("/form")
+@app.route("/form", methods=["GET", "POST"])
 def form():
     """Avaa lomakkeen, johon täytetään lähdeviitaus
     """
-
-    cite_types = configuration_repository.get_cites()
-    types = []
-    for keys in cite_types.keys():
-        types.append(keys)
-    cite_fields = cite_types['Book']
-    return render_template("form.html", types=types, cite_fields=cite_fields)
+    cites = configuration_repository.get_cites()
+    cite_types = []
+    for keys in cites.keys():
+        cite_types.append(keys)
+    if request.method == "GET":    
+        return render_template("form.html", types=cite_types) 
+    required_fields = []
+    optional_fields = []
+    typ = request.form.get("types")
+    for key, values in cites[typ].items():
+        if values[1]:
+            required_fields.append((key, values[0]))
+        else:
+            optional_fields.append((key, values[0]))
+    return render_template("form.html",
+        types = cite_types,
+        required_fields = required_fields,
+        optional_fields = optional_fields
+    )
 
 @app.route("/create", methods=["POST"])
 def create():
@@ -32,8 +44,9 @@ def create():
     title = request.form["title"]
     year = request.form["year"]
     publisher = request.form["publisher"]
-    book_service.save_citation(author_name, title, year, publisher)
-    return redirect("/")
+    if book_service.save_citation(author_name, title, year, publisher):
+        return redirect("/")
+    return redirect("/form")
 
 @app.route("/all")
 def view_all_citations():

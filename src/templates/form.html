@@ -1,26 +1,40 @@
 <head>
     <title>Lisää Viite {{ types[0] }}</title>
 </head>
-<form action="/create" method="POST">
-    {% for key, value in cite_fields.items() %}
-        {% if value[1] %}
-            <p>{{ value[0] }}*:</p>
-            <input type="text" id="{{ key }}"  name="{{ key }}" required>
-        {% else %}
-            <p>{{ value[0] }}:</p>
-            <input type="text" id="{{ key }}"  name="{{ key }}">
-        {% endif %}
-    {% endfor %}
-    <input type="submit" value="Luo viite">
-    <!---
-    <p>Kirjailijan nimi:</p>
-    <input type="text" id="author" name="author" required></p>
-    <p>Kirjan nimi:</p>
-    <input type="text" id="title" name="title" required></p>
-    <p>Kirjan julkaisuvuosi:</p>
-    <input type="text" id="year" name="year" required></p>
-    <p>Kirjan julkaisja:</p>
-    <input type="text" id="publisher" name="publisher" required></p>
-    --->
+<body>
+    <form action="/form" method="POST">
+        <label for="types">Valitse viitetyyppi:</label>
+        <select name="types" onchange="this.form.submit()">
+            {% for type in types %}
+            <option value="{{ type }}">{{ type }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Valitse">
+    </form>
 
-</form>
+    <form action="/create" method="POST">
+        <p>Pakolliset kentät</p>
+        {% for field in required_fields %}
+        <label for="{{ field[0] }}">{{ field[1] }}</label>
+        <input type="text", id="{{ field[0] }}" name="{{ field[0] }}" placeholder="pakollinen kenttä" required>
+        {% endfor %}
+        <p>Valinnaiset kentät</p>
+        {% for field in optional_fields %}
+        <label for="{{ field[0] }}">{{ field[1] }}</label>
+        <input type="text", id="{{ field[0] }}" name="{{ field[0] }}">
+        {% endfor %}
+        <input id="submit-button" type="submit" value="Luo viite">
+    </form>
+
+    <style>
+        label {
+            display: block;
+            padding-bottom: 2px;
+            padding-top: 4px;
+        }
+
+        #submit-button {
+            display: block;
+        }
+    </style>
+</body>

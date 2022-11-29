@@ -26,7 +26,12 @@ class ConfigurationRepository:
         for typ, fields in content.items():
             self._cites[typ] = {}
             for field, values in fields.items():
-                self._cites[typ][field] = (values[0], bool(values[1]))
+                field_name = values[0]
+                if values[1] == "True":
+                    boolean = True
+                else:
+                    boolean = False
+                self._cites[typ][field] = (field_name, boolean)
 
     def get_cites(self):
         return self._cites
