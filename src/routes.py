@@ -5,14 +5,23 @@ from services.bibtex_service import BibTexService
 
 @app.route("/")
 def index():
+    """Avaa etusivun
+    """
+
     return render_template("index.html", book=book_service.get_last())
 
 @app.route("/form")
 def form():
+    """Avaa lomakkeen, johon täytetään lähdeviitaus
+    """
+
     return render_template("form.html")
 
 @app.route("/create", methods=["POST"])
 def create():
+    """Luo lomakkeen pohjalta lähdeviitauksen
+    """
+
     author_name = request.form["author"]
     title = request.form["title"]
     year = request.form["year"]
@@ -23,6 +32,8 @@ def create():
 
 @app.route("/all")
 def view_all_citations():
+    """Näyttää kaikki lähdeviittauksen ihmisluettavassa muodossa
+    """
 
     return render_template(
         "citations.html",
@@ -31,6 +42,9 @@ def view_all_citations():
 
 @app.route("/bibtex")
 def generate_bibtex():
+    """Muodostaa lähdeviittauksista bibtex muotoisen tekstin
+    """
+
     bibtex_service = BibTexService()
 
     bibtex_service.turn_books_to_bibtex()
