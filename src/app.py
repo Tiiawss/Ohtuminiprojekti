@@ -1,6 +1,5 @@
 from flask import Flask
-from services.book_citation_service import BookCitation
 
 app = Flask(__name__)
 
-import routes
+import routes # pylint: disable=unused-import, wrong-import-position, cyclic-import
