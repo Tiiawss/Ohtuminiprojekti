@@ -19,11 +19,12 @@ def form():
     cite_types = []
     for keys in cites:
         cite_types.append(keys)
-    if request.method == "GET":
-        return render_template("form.html", types=cite_types)
     required_fields = []
     optional_fields = []
-    typ = request.form.get("types")
+    if request.method == "GET":
+        typ = cite_types[0]
+    else:
+        typ = request.form.get("types")
     for key, values in cites[typ].items():
         if values[1]:
             required_fields.append((key, values[0]))
@@ -32,7 +33,8 @@ def form():
     return render_template("form.html",
         types = cite_types,
         required_fields = required_fields,
-        optional_fields = optional_fields
+        optional_fields = optional_fields,
+        selected = typ
     )
 
 @app.route("/create", methods=["POST"])
