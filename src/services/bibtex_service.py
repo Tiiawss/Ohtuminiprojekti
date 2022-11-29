@@ -21,7 +21,7 @@ class BibTexService:
         books = self.book_service.get_all()
 
         for book in books:
-            citekey = "@Book{" + book["reference"] + ","
+            citekey = "@Book{" + book["cite_key"] + ","
             author = f'{"author"} = "{book["author"]}",'
             title = 'title = "' + book["title"] + '",'
             year = 'year = "' + book["year"] + '",'
