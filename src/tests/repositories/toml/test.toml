@@ -1,0 +1,8 @@
+[Book]
+author = ['Kirjailijan nimi', 'True']
+name = ['Kirjan nimi', 'True']
+year = ['Julkaisuvuosi', 'True']
+not_required = ['Ei pakollinen', '']
+
+[Article]
+author = ['Nimi', 'True']
