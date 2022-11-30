@@ -7,7 +7,7 @@
         <h1>Kaikki viittaukset</h1>
         <ul>
             {% for citation in citations %}
-            <li> {{ citation.cite_key }} </li>
+            <li>citekey: {{ citation.cite_key }} </li>
             <form action="/remove" method="POST">
                     <input type="hidden" name="id" value="{{ citation.cite_key }}">
                     <input type="submit" value="Poista viittaus">
@@ -16,7 +16,7 @@
                 {% for key, value in citation.items() %}
                 
                     {% if key != "cite_key" %}
-                        <li id="{{ citation.cite_key }}-{{key}}"> {{ value }} </li>
+                        <li id="{{ citation.cite_key }}-{{key}}">{{key}}: {{ value }}</li>
                     {% endif %}
                 {% endfor %}
             </ul>
