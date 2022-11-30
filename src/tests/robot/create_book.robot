@@ -40,13 +40,13 @@ Last Book Is In All
 
     Go To All Page
     ${author}  Get Text  id:${citekey}-author
-    Should Be Equal  ${author}  pekka
+    Should Be Equal  ${author}  author: pekka
     ${author}  Get Text  id:${citekey}-title
-    Should Be Equal  ${author}  titteli
+    Should Be Equal  ${author}  title: titteli
     ${author}  Get Text  id:${citekey}-year
-    Should Be Equal  ${author}  1234
+    Should Be Equal  ${author}  year: 1234
     ${author}  Get Text  id:${citekey}-publisher
-    Should Be Equal  ${author}  julkaisija
+    Should Be Equal  ${author}  publisher: julkaisija
 
 Create Book With Missing Author
     Set Input Field  title  titteli
