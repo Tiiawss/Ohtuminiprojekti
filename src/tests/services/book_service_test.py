@@ -99,6 +99,7 @@ class TestBookService(unittest.TestCase):
         )
 
     def test_get_last(self):
+
         self.book_service.save_citation(
             "joku",
             "Teeskentelyä",
@@ -117,8 +118,14 @@ class TestBookService(unittest.TestCase):
             book,
             self.book_service.get_all()[-1]
         )
+    def test_get_last_none(self):
+
+        books = self.book_service.get_last()
+
+        self.assertEqual(books, None)
 
     def test_remove_citation(self):
+
         self.book_service.save_citation(
             "Pek Pekka",
             "Pekan seikkalut",
