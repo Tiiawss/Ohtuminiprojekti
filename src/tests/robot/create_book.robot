@@ -7,7 +7,7 @@ Test Setup  Go To Form Page
 
 *** Test Cases ***
 Form Page Is Open
-    Form Page Should Be Open
+    Form Book Page Should Be Open
 
 Create Book With Correct Values
     Set Input Field  author  pekka
@@ -53,7 +53,20 @@ Create Book With Missing Author
     Set Input Field  year  vuosi
     Set Input Field  publisher  julkaisija
     Submit Form
-    Form Page Should Be Open
+    Form Book Page Should Be Open
+
+Select Article From Dropdown
+    Select From List By Index  name:types  1
+    List Selection Should Be  name:types  Article
+
+Create Article With Required Values
+    Select From List By Index  name:types  1
+    Set Input Field  author  pekka
+    Set Input Field  title  titteli
+    Set Input Field  journal  journali
+    Set Input Field  year  2922
+    Submit Form
+    Home Page Should Be Open
 
 *** Keyword ***
 
