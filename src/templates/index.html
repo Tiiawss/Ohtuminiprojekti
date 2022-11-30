@@ -6,15 +6,11 @@
 <a href="/all">Katso kaikki</a>
 <a href="/bibtex">Muodosta BibTex</a>
 <h2> Edellinen lisäyksesi:</h2>
-{% if book %}
-    <p>Citekey: <span id="citekey">{{ book.cite_key }}</span></p>
-    <p>Kirjailija: {{ book.author }}</p>
-    <p>Kirjan nimi: {{ book.title }}</p>
-    <p>Kirjan julkaisuvuosi: {{ book.year }}</p>
-    <p>Kirjan julkaisija: {{ book.publisher }}</p>
-    
-
-
+{% if cite_key and last_citation_rows %}
+    <p>Citekey: <span id="citekey">{{ cite_key }}</span></p>
+    {% for row in last_citation_rows%}
+        <p>{{row}}</p>
+    {% endfor %}
 {% endif %}
 
 

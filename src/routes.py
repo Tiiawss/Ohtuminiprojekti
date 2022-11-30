@@ -10,7 +10,30 @@ def index():
     """Avaa etusivun
     """
 
-    return render_template("index.html", book=book_service.get_last())
+    if not book_service.get_last():
+        return render_template("index.html",
+            last_citation_rows=None,
+            cite_key = None
+        )
+
+    cite_type = book_service.get_last()["type"]
+    dict_fields = configuration_repository.get_cites()[cite_type]
+    last_citation_rows = []
+
+    for field_key, value in book_service.get_last().items():
+        if field_key in ["type", "cite_key"]:
+            continue
+        selostus_teksti = dict_fields[field_key][0]
+
+        last_citation_rows.append(
+            f"{selostus_teksti}: {value}"
+        )
+
+
+    return render_template("index.html",
+        last_citation_rows=last_citation_rows,
+        cite_key = book_service.get_last()["cite_key"]
+    )
 
 
 @app.route("/form", methods=["GET", "POST"])
