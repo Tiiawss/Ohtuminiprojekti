@@ -15,28 +15,42 @@ class BibTexService:
         self.book_service = book_service
         self.bibtex = []
 
-    def turn_books_to_bibtex(self):
+    def turn_cites_to_bibtex(self):
         """Turns book citations to bibtex
         """
 
-        books = self.book_service.get_all()
+        cites = self.book_service.get_all()
 
-        for book in books:
-            citekey = "@Book{" + book["cite_key"] + ","
-            author = f'{"author"} = "{book["author"]}",'
-            title = 'title = "' + book["title"] + '",'
-            year = 'year = "' + book["year"] + '",'
-            publisher = 'publisher = "' + book["publisher"] + '"'
-            book_dict = {
-                "Citekey": citekey,
-                "Author": author,
-                "Title": title,
-                "Year": year,
-                "Publisher": publisher,
-                "Last": "}"
-            }
+        print(cites)
+        for cite in cites:
+            cite_list = []
+            first_row = '@' + cite['type'] + '{' + cite['cite_key'] + ','
+            cite_list.append(first_row)
+            lenght = len(cite.keys()) - 1
+            i = 1
+            for key, value in cite.items():
+                if key in ['type', 'cite_key']:
+                    continue
+                i += 1
+                if i == lenght:
+                    break
+                row = f'    {key} = {value},'
+                cite_list.append(row)
+            row_values = list(cite.items())[-2]
+            row = f'    {row_values[0]} = {row_values[1]}'
+            cite_list.append(row)
+            cite_list.append('}')
 
-            self.bibtex.append(book_dict)
+            # book_dict = {
+            #    "Citekey": citekey,
+            #    "Author": author,
+            #    "Title": title,
+            #    "Year": year,
+            #    "Publisher": publisher,
+            #    "Last": "}"
+            # }
+
+            self.bibtex.append(cite_list)
 
     def get_bibtex(self):
         """Returns the bibtex formatted citations
