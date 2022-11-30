@@ -18,8 +18,8 @@ Open And Configure Browser
 Home Page Should Be Open
     Title Should Be  Etusivu
 
-Form Page Should Be Open
-    Title Should Be  Lisää Viite
+Form Book Page Should Be Open
+    Title Should Be  Lisää Viite Book
 
 All Page Should Be Open
     Title Should Be  Kaikki Viitteet
