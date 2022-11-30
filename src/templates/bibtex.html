@@ -4,13 +4,9 @@
         <title>Bibtex</title>
     </head>
     <body>
-        {% for citation in bibtex %}
-<pre>{{ citation.Citekey }}
-    {{ citation.Author }}
-    {{ citation.Title }}
-    {{ citation.Year }}
-    {{ citation.Publisher }}
-{{ citation.Last }}</pre>
-        {% endfor %}
+    {% for citation in bibtex %}
+<pre>{% for row in citation %}{{ row }}
+{% endfor %}</pre>
+       {% endfor %}
     </body>
 </html>

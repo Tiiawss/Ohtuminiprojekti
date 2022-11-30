@@ -49,7 +49,7 @@ class BookCitation:
 
         return get_unique_from(citekey)
 
-    def save_citation(self, field_keys_values :list) -> bool:
+    def save_citation(self, field_keys_values: list) -> bool:
         """
 
         Args:

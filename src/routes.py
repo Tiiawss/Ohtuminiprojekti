@@ -72,7 +72,7 @@ def create():
     cite_values = []
     try:
         typ = request.form["selected"]
-    except NameError as N:
+    except NameError:
         typ = list(cites.keys())[0]
     cite_values.append(("type", typ))
     for key in cites[typ]:
@@ -112,7 +112,7 @@ def generate_bibtex():
 
     bibtex_service = BibTexService()
 
-    bibtex_service.turn_books_to_bibtex()
+    bibtex_service.turn_cites_to_bibtex()
 
     bibtex = bibtex_service.get_bibtex()
 
