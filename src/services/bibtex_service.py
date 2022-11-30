@@ -34,10 +34,10 @@ class BibTexService:
                 i += 1
                 if i == lenght:
                     break
-                row = f'    {key} = {value},'
+                row = f'    {key} = "{value}",'
                 cite_list.append(row)
             row_values = list(cite.items())[-2]
-            row = f'    {row_values[0]} = {row_values[1]}'
+            row = f'    {row_values[0]} = "{row_values[1]}"'
             cite_list.append(row)
             cite_list.append('}')
 
