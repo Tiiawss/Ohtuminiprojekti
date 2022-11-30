@@ -6,7 +6,7 @@ class ConfigurationRepository:
     """Luokka, joka hakee sovellusta varten tiedot lähdeviittausten kentistä
     """
 
-    def __init__(self, toml_file = TOML_FILENAME) -> None:
+    def __init__(self, toml_file=TOML_FILENAME) -> None:
         """Alustaa luokan
         """
 

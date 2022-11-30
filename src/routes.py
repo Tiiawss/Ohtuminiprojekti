@@ -48,7 +48,7 @@ def create():
     cites = configuration_repository.get_cites()
     cite_values = []
     try:
-        typ = request.form[selected]
+        typ = request.form["selected"]
     except NameError as N:
         typ = list(cites.keys())[0]
     cite_values.append(("type", typ))
