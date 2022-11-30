@@ -75,5 +75,16 @@ class TestBookRepository(unittest.TestCase):
         self.assertEqual(len(books), 1)
 
         
-
-
+    def test_remove_book_that_does_not_exist(self):
+        self.book_repository.add_book(
+            book={
+                "cite_key": "1",
+                "author": "Tee",
+                "title": "Teeskentelyä",
+                "year": "2022",
+                "publisher": "Paras"
+            }
+        )
+        
+        boolean = self.book_repository.remove_book("eiole")
+        self.assertEqual(boolean, False)
