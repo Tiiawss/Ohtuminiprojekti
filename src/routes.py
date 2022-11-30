@@ -45,11 +45,18 @@ def create():
     """Luo lomakkeen pohjalta lähdeviitauksen
     """
 
-    author_name = request.form["author"]
-    title = request.form["title"]
-    year = request.form["year"]
-    publisher = request.form["publisher"]
-    if book_service.save_citation(author_name, title, year, publisher):
+    cites = configuration_repository.get_cites()
+    cite_values = []
+    try:
+        typ = request.form[selected]
+    except NameError as N:
+        typ = list(cites.keys())[0]
+    cite_values.append(("type", typ))
+    for key in cites[typ]:
+        field_input = request.form[key]
+        if field_input:
+            cite_values.append((key, field_input))
+    if book_service.save_citation(cite_values):
         return redirect("/")
     return redirect("/form")
 
