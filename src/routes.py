@@ -1,6 +1,6 @@
 from flask import redirect, render_template, request
 from app import app
-from services.book_citation_service import book_service
+from services.citation_service import citation_service
 from services.bibtex_service import BibTexService
 from repositories.configuration_repository import configuration_repository
 
@@ -10,17 +10,17 @@ def index():
     """Avaa etusivun
     """
 
-    if not book_service.get_last():
+    if not citation_service.get_last():
         return render_template("index.html",
             last_citation_rows=None,
             cite_key = None
         )
 
-    cite_type = book_service.get_last()["type"]
+    cite_type = citation_service.get_last()["type"]
     dict_fields = configuration_repository.get_cites()[cite_type]
     last_citation_rows = []
 
-    for field_key, value in book_service.get_last().items():
+    for field_key, value in citation_service.get_last().items():
         if field_key in ["type", "cite_key"]:
             continue
         selostus_teksti = dict_fields[field_key][0]
@@ -32,7 +32,7 @@ def index():
 
     return render_template("index.html",
         last_citation_rows=last_citation_rows,
-        cite_key = book_service.get_last()["cite_key"]
+        cite_key = citation_service.get_last()["cite_key"]
     )
 
 
@@ -79,7 +79,7 @@ def create():
         field_input = request.form[key]
         if field_input:
             cite_values.append((key, field_input))
-    if book_service.save_citation(cite_values):
+    if citation_service.save_citation(cite_values):
         return redirect("/")
     return redirect("/form")
 
@@ -91,7 +91,7 @@ def view_all_citations():
 
     return render_template(
         "citations.html",
-        citations=book_service.get_all()
+        citations=citation_service.get_all()
     )
 
 
@@ -101,7 +101,7 @@ def remove_citation():
     """
 
     citation_key = request.form["id"]
-    book_service.remove_citation(citation_key)
+    citation_service.remove_citation(citation_key)
     return redirect("/")
 
 

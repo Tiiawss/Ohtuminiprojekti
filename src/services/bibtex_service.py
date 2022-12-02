@@ -1,25 +1,25 @@
-from services.book_citation_service import book_service as default_book_service
+from services.citation_service import citation_service as default_citation_service
 
 
 class BibTexService:
     """Class which is responsible for turning citations to bibtex
     """
 
-    def __init__(self, book_service=default_book_service):
+    def __init__(self, citation_service=default_citation_service):
         """ Initialize the Service for use
 
         Args:
-            book_service: The service for book citations
+            citation_service: The service for citations
         """
 
-        self.book_service = book_service
+        self.citation_service = citation_service
         self.bibtex = []
 
     def turn_cites_to_bibtex(self):
-        """Turns book citations to bibtex
+        """Turns citations to bibtex
         """
 
-        cites = self.book_service.get_all()
+        cites = self.citation_service.get_all()
 
         print(cites)
         for cite in cites:
