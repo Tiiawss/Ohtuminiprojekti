@@ -8,3 +8,4 @@ output.xml
 report.html
 *selenium*
 *.swp
+*secrets*
