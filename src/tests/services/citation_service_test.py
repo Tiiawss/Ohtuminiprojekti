@@ -11,7 +11,7 @@ class StudCitationRepo:
 
         self.citations.append(citation)
 
-    def get_citations(self) -> list:
+    def get_citation(self) -> list:
         return self.citations
 
     def remove_citation(self, cite_key) -> bool:
@@ -187,3 +187,6 @@ class TestCitationService(unittest.TestCase):
 
         citekey = self.citation_service.get_all()[0]['cite_key']
         self.citation_service.remove_citation(citekey)
+        all = self.citation_service.get_all()
+        self.assertEqual(len(all), 1)
+        self.assertEqual(all[0]["author"], "pekpekka1")
