@@ -1,13 +1,13 @@
 import random
 import string
-from repositories.book_repository import book_repository
+from repositories.citation_repository import citation_repository
 
 
-class BookCitation:
-    """ Book Service """
+class CitationService:
+    """ Citation Service """
 
-    def __init__(self, bookrepository=book_repository) -> None:
-        self.repo = bookrepository
+    def __init__(self, citationrepository=citation_repository) -> None:
+        self.repo = citationrepository
 
     def _get_unique_cite_key(self, author: str, year: str) -> str:
         """ Returns unique citeky based on author and year
@@ -26,8 +26,8 @@ class BookCitation:
             Returns:
                 str: unique citekey
             """
-            for book in self.get_all():
-                if book['cite_key'] == citekey:
+            for citation in self.get_all():
+                if citation['cite_key'] == citekey:
                     return get_unique_from(
                         f"{citekey}{random.choice(string.ascii_lowercase)}"
                     )
@@ -58,41 +58,41 @@ class BookCitation:
         Returns:
             bool: true for success
         """
-        book_to_save = {}
+        citation_to_save = {}
         for key, value in field_keys_values:
 
             # If string contains only white space characters
             if value.strip() == "":
                 return False
 
-            book_to_save[key] = value
+            citation_to_save[key] = value
 
         cite_key_author = "no_author"
-        if book_to_save.get("author"):
-            cite_key_author = book_to_save["author"]
+        if citation_to_save.get("author"):
+            cite_key_author = citation_to_save["author"]
 
         cite_key_year = "420"
-        if book_to_save.get("year"):
-            cite_key_year = book_to_save["year"]
+        if citation_to_save.get("year"):
+            cite_key_year = citation_to_save["year"]
 
-        book_to_save['cite_key'] = self._get_unique_cite_key(
+        citation_to_save['cite_key'] = self._get_unique_cite_key(
             cite_key_author,
             cite_key_year
         )
 
-        self.repo.add_book(book_to_save)
+        self.repo.add_citation(citation_to_save)
         return True
 
     def get_all(self):
-        """ Return list of all books """
-        return self.repo.get_books()
+        """ Return list of all citations """
+        return self.repo.get_citation()
 
     def get_last(self):
-        """ Return last element of books
+        """ Return last element of citations
         """
-        books = self.repo.get_books()
-        if len(books) > 0:
-            return books[-1]
+        citations = self.repo.get_citation()
+        if len(citations) > 0:
+            return citations[-1]
         return None
 
     def remove_citation(self, cite_key: str) -> bool:
@@ -105,7 +105,7 @@ class BookCitation:
             bool:
         """
 
-        return self.repo.remove_book(cite_key)
+        return self.repo.remove_citation(cite_key)
 
 
-book_service = BookCitation(book_repository)
+citation_service = CitationService(citation_repository)

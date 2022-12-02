@@ -1,17 +1,17 @@
 import unittest
-from repositories.book_repository import book_repository
+from repositories.citation_repository import citation_repository
 
 
-class TestBookRepository(unittest.TestCase):
+class TestCitationRepository(unittest.TestCase):
     def setUp(self):
-        self.book_repository = book_repository
-        self.book_repository.books = []
+        self.citation_repository = citation_repository
+        self.citation_repository.citations = []
 
-    def test_new_book_list_is_empty(self):
-        self.assertEqual(self.book_repository.books, [])
+    def test_new_citation_list_is_empty(self):
+        self.assertEqual(self.citation_repository.citations, [])
 
-    def test_add_new_book(self):
-        self.book_repository.add_book(book={
+    def test_add_new_citation(self):
+        self.citation_repository.add_citation(citation={
             "cite_key": "1",
             "author": "Tee",
             "title": "Teeskentelyä",
@@ -20,14 +20,14 @@ class TestBookRepository(unittest.TestCase):
         }
         )
 
-        self.assertEqual(len(self.book_repository.books), 1)
-        self.assertEqual(self.book_repository.books[0]["cite_key"], "1")
+        self.assertEqual(len(self.citation_repository.citations), 1)
+        self.assertEqual(self.citation_repository.citations[0]["cite_key"], "1")
         self.assertEqual(
-            self.book_repository.books[0]["title"], "Teeskentelyä")
+            self.citation_repository.citations[0]["title"], "Teeskentelyä")
 
-    def test_return_books_correctly(self):
-        self.book_repository.add_book(
-            book={
+    def test_return_citations_correctly(self):
+        self.citation_repository.add_citation(
+            citation={
                 "cite_key": "1",
                 "author": "Tee",
                 "title": "Teeskentelyä",
@@ -35,8 +35,8 @@ class TestBookRepository(unittest.TestCase):
                 "publisher": "Paras"
             }
         )
-        self.book_repository.add_book(
-            book={
+        self.citation_repository.add_citation(
+            citation={
                 "cite_key": "2",
                 "author": "Tee",
                 "title": "Teeskentelyä2",
@@ -45,14 +45,14 @@ class TestBookRepository(unittest.TestCase):
             }
         )
 
-        books = self.book_repository.get_books()
+        citations = self.citation_repository.get_citation()
 
-        self.assertEqual(len(books), 2)
-        self.assertEqual(books[0]["cite_key"], "1")
+        self.assertEqual(len(citations), 2)
+        self.assertEqual(citations[0]["cite_key"], "1")
 
-    def test_remove_book(self):
-        self.book_repository.add_book(
-            book={
+    def test_remove_citations(self):
+        self.citation_repository.add_citation(
+            citation={
                 "cite_key": "1",
                 "author": "Tee",
                 "title": "Teeskentelyä",
@@ -60,8 +60,8 @@ class TestBookRepository(unittest.TestCase):
                 "publisher": "Paras"
             }
         )
-        self.book_repository.add_book(
-            book={
+        self.citation_repository.add_citation(
+            citation={
                 "cite_key": "2",
                 "author": "Tee",
                 "title": "Teeskentelyä2",
@@ -69,15 +69,15 @@ class TestBookRepository(unittest.TestCase):
                 "publisher": "Paras"
             }
         )
-        books = self.book_repository.get_books()
-        cite_key = self.book_repository.books[0]["cite_key"]
-        self.book_repository.remove_book(cite_key)
-        self.assertEqual(len(books), 1)
+        citations = self.citation_repository.get_citation()
+        cite_key = self.citation_repository.citations[0]["cite_key"]
+        self.citation_repository.remove_citation(cite_key)
+        self.assertEqual(len(citations), 1)
 
         
-    def test_remove_book_that_does_not_exist(self):
-        self.book_repository.add_book(
-            book={
+    def test_remove_citation_that_does_not_exist(self):
+        self.citation_repository.add_citation(
+            citation={
                 "cite_key": "1",
                 "author": "Tee",
                 "title": "Teeskentelyä",
@@ -86,5 +86,5 @@ class TestBookRepository(unittest.TestCase):
             }
         )
         
-        boolean = self.book_repository.remove_book("eiole")
+        boolean = self.citation_repository.remove_citation("eiole")
         self.assertEqual(boolean, False)
