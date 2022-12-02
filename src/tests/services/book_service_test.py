@@ -31,7 +31,7 @@ class TestBookService(unittest.TestCase):
         self.book_service = BookCitation(StudBookRepo())
 
     def test_saves_citation_correclty(self):
-        
+
         re = self.book_service.save_citation([
         ("author", "tee"),
         ("title", "teee"), 
@@ -52,12 +52,32 @@ class TestBookService(unittest.TestCase):
         ("year","2002"),
         ("publisher","jtn")
         ])
-        
+
         books = self.book_service.get_all()
 
         self.assertEqual(re, False)
 
         self.assertEqual(len(books), 0)
+
+    def test_missing_author_field(self):
+
+        self.book_service.save_citation([
+        ("title", "teee"),
+        ("year","2002"),
+        ("publisher","jtn")
+        ])
+        citation = self.book_service.get_all()[0]
+        self.assertEqual(citation["cite_key"], "noaut2002")
+
+    def test_missing_year_field(self):
+
+        self.book_service.save_citation([
+        ("author", "teee"),
+        ("title", "tooo"),
+        ("publisher","jtn")
+        ])
+        citation = self.book_service.get_all()[0]
+        self.assertEqual(citation["cite_key"], "teee420")
 
     def test_unique_citekey_proper_formatting(self):
 
@@ -100,6 +120,28 @@ class TestBookService(unittest.TestCase):
             self.book_service.get_all()[0]["cite_key"],
             self.book_service.get_all()[1]["cite_key"]
         )
+
+    def test_only_letters_to_citekey_from_author(self):
+
+        self.book_service.save_citation([
+        ("author", "pe1!3.,"),
+        ("title", "teee"),
+        ("year","2002"),
+        ("publisher","jtn")
+        ])
+        cite_key = self.book_service.get_all()[0]["cite_key"]
+        self.assertEqual(cite_key, "pe2002")
+
+    def test_only_digits_to_citekey_from_year(self):
+
+        self.book_service.save_citation([
+        ("author", "pe1!3.,"),
+        ("title", "teee"),
+        ("year","2002 -- 2004"),
+        ("publisher","jtn")
+        ])
+        cite_key = self.book_service.get_all()[0]["cite_key"]
+        self.assertEqual(cite_key, "pe2002")
 
     def test_get_last(self):
 
