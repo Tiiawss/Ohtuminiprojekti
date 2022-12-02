@@ -39,6 +39,7 @@ Last Book Is In All
     ${citekey}  Get Text  id:citekey
 
     Go To All Page
+    Element Should Contain  id:${citekey}-type  Book
     ${author}  Get Text  id:${citekey}-author
     Should Be Equal  ${author}  author: pekka
     ${author}  Get Text  id:${citekey}-title
@@ -67,6 +68,16 @@ Create Article With Required Values
     Set Input Field  year  2922
     Submit Form
     Home Page Should Be Open
+    ${citekey}  Get Text  id:citekey
 
     Go To All Page
     Page Should Contain  Article
+    Element Should Contain  id:${citekey}-type  Article
+    ${author}  Get Text  id:${citekey}-author
+    Should Be Equal  ${author}  author: pekka
+    ${author}  Get Text  id:${citekey}-title
+    Should Be Equal  ${author}  title: titteli
+    ${author}  Get Text  id:${citekey}-year
+    Should Be Equal  ${author}  year: 2922
+    ${author}  Get Text  id:${citekey}-journal
+    Should Be Equal  ${author}  journal: journali
