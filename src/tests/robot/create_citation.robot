@@ -68,11 +68,5 @@ Create Article With Required Values
     Submit Form
     Home Page Should Be Open
 
-*** Keyword ***
-
-Set Input Field
-    [Arguments]  ${field_id}  ${text}
-    Input Text  ${field_id}  ${text}
-
-Submit Form
-    Click Button  Luo viite
+    Go To All Page
+    Page Should Contain  Article
