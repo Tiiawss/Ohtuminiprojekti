@@ -81,3 +81,52 @@ Create Article With Required Values
     Should Be Equal  ${author}  year: 2922
     ${author}  Get Text  id:${citekey}-journal
     Should Be Equal  ${author}  journal: journali
+
+Create Article With Optional Values
+    Select From List By Index  name:types  1
+    Set Input Field  author  putte
+    Set Input Field  title  titteli
+    Set Input Field  journal  journali
+    Set Input Field  year  2922
+    Set Input Field  pages  111
+    Set Input Field  month  13
+    Set Input Field  number  000
+
+    Submit Form
+    Home Page Should Be Open
+    ${citekey}  Get Text  id:citekey
+
+    Go To All Page
+    Page Should Contain  Article
+    Element Should Contain  id:${citekey}-type  Article
+    ${author}  Get Text  id:${citekey}-author
+    Should Be Equal  ${author}  author: putte
+    ${title}  Get Text  id:${citekey}-title
+    Should Be Equal  ${title}  title: titteli
+    ${year}  Get Text  id:${citekey}-year
+    Should Be Equal  ${year}  year: 2922
+    ${journal}  Get Text  id:${citekey}-journal
+    Should Be Equal  ${journal}  journal: journali
+    ${pages}  Get Text  id:${citekey}-pages
+    Should Be Equal  ${pages}  pages: 111
+    ${month}  Get Text  id:${citekey}-month
+    Should Be Equal  ${month}  month: 13
+    ${number}  Get Text  id:${citekey}-number
+    Should Be Equal  ${number}  number: 000
+
+    Page Should Not Contain Element  id:${citekey}-volume
+    Page Should Not Contain Element  id:${citekey}-note
+    Page Should Not Contain Element  id:${citekey}-annote
+
+Created Citation In Bibtex
+    Set Input Field  author  myy
+    Set Input Field  title  titteli
+    Set Input Field  year  1234
+    Set Input Field  publisher  julkaisija
+    Submit Form
+
+    Home Page Should Be Open
+    ${citekey}  Get Text  id:citekey
+    Go To Bibtex Page
+
+    Page Should Contain  @Book{myy1234,
