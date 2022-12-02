@@ -10,7 +10,30 @@ def index():
     """Avaa etusivun
     """
 
-    return render_template("index.html", book=book_service.get_last())
+    if not book_service.get_last():
+        return render_template("index.html",
+            last_citation_rows=None,
+            cite_key = None
+        )
+
+    cite_type = book_service.get_last()["type"]
+    dict_fields = configuration_repository.get_cites()[cite_type]
+    last_citation_rows = []
+
+    for field_key, value in book_service.get_last().items():
+        if field_key in ["type", "cite_key"]:
+            continue
+        selostus_teksti = dict_fields[field_key][0]
+
+        last_citation_rows.append(
+            f"{selostus_teksti}: {value}"
+        )
+
+
+    return render_template("index.html",
+        last_citation_rows=last_citation_rows,
+        cite_key = book_service.get_last()["cite_key"]
+    )
 
 
 @app.route("/form", methods=["GET", "POST"])
@@ -45,11 +68,18 @@ def create():
     """Luo lomakkeen pohjalta lähdeviitauksen
     """
 
-    author_name = request.form["author"]
-    title = request.form["title"]
-    year = request.form["year"]
-    publisher = request.form["publisher"]
-    if book_service.save_citation(author_name, title, year, publisher):
+    cites = configuration_repository.get_cites()
+    cite_values = []
+    try:
+        typ = request.form["selected"]
+    except NameError:
+        typ = list(cites.keys())[0]
+    cite_values.append(("type", typ))
+    for key in cites[typ]:
+        field_input = request.form[key]
+        if field_input:
+            cite_values.append((key, field_input))
+    if book_service.save_citation(cite_values):
         return redirect("/")
     return redirect("/form")
 
@@ -82,7 +112,7 @@ def generate_bibtex():
 
     bibtex_service = BibTexService()
 
-    bibtex_service.turn_books_to_bibtex()
+    bibtex_service.turn_cites_to_bibtex()
 
     bibtex = bibtex_service.get_bibtex()
 

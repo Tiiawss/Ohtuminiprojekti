@@ -7,7 +7,7 @@ Test Setup  Go To Form Page
 
 *** Test Cases ***
 Form Page Is Open
-    Form Page Should Be Open
+    Form Book Page Should Be Open
 
 Create Book With Correct Values
     Set Input Field  author  pekka
@@ -40,20 +40,33 @@ Last Book Is In All
 
     Go To All Page
     ${author}  Get Text  id:${citekey}-author
-    Should Be Equal  ${author}  pekka
+    Should Be Equal  ${author}  author: pekka
     ${author}  Get Text  id:${citekey}-title
-    Should Be Equal  ${author}  titteli
+    Should Be Equal  ${author}  title: titteli
     ${author}  Get Text  id:${citekey}-year
-    Should Be Equal  ${author}  1234
+    Should Be Equal  ${author}  year: 1234
     ${author}  Get Text  id:${citekey}-publisher
-    Should Be Equal  ${author}  julkaisija
+    Should Be Equal  ${author}  publisher: julkaisija
 
 Create Book With Missing Author
     Set Input Field  title  titteli
     Set Input Field  year  vuosi
     Set Input Field  publisher  julkaisija
     Submit Form
-    Form Page Should Be Open
+    Form Book Page Should Be Open
+
+Select Article From Dropdown
+    Select From List By Index  name:types  1
+    List Selection Should Be  name:types  Article
+
+Create Article With Required Values
+    Select From List By Index  name:types  1
+    Set Input Field  author  pekka
+    Set Input Field  title  titteli
+    Set Input Field  journal  journali
+    Set Input Field  year  2922
+    Submit Form
+    Home Page Should Be Open
 
 *** Keyword ***
 

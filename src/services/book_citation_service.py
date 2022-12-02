@@ -49,21 +49,39 @@ class BookCitation:
 
         return get_unique_from(citekey)
 
-    def save_citation(self, author, title, year, publisher):
-        """ Save book to repository """
+    def save_citation(self, field_keys_values: list) -> bool:
+        """
 
-        if author.strip() and title.strip() and year.strip() and publisher.strip():
-            book = {
-                "cite_key":
-                self._get_unique_cite_key(author, year),
-                "author": author,
-                "title": title,
-                "year": year,
-                "publisher": publisher
-            }
-            self.repo.add_book(book)
-            return True
-        return False
+        Args:
+            field_keys_values (list): list of tuples
+
+        Returns:
+            bool: true for success
+        """
+        book_to_save = {}
+        for key, value in field_keys_values:
+
+            # If string contains only white space characters
+            if value.strip() == "":
+                return False
+
+            book_to_save[key] = value
+
+        cite_key_author = "no_author"
+        if book_to_save.get("author"):
+            cite_key_author = book_to_save["author"]
+
+        cite_key_year = "420"
+        if book_to_save.get("year"):
+            cite_key_year = book_to_save["year"]
+
+        book_to_save['cite_key'] = self._get_unique_cite_key(
+            cite_key_author,
+            cite_key_year
+        )
+
+        self.repo.add_book(book_to_save)
+        return True
 
     def get_all(self):
         """ Return list of all books """

@@ -1,18 +1,19 @@
 import toml
+from config import TOML_FILENAME
 
 
 class ConfigurationRepository:
     """Luokka, joka hakee sovellusta varten tiedot lähdeviittausten kentistä
     """
 
-    def __init__(self) -> None:
+    def __init__(self, toml_file=TOML_FILENAME) -> None:
         """Alustaa luokan
         """
 
         self._cites = {}
-        self.cites_fields()
+        self.cites_fields(toml_file)
 
-    def cites_fields(self):
+    def cites_fields(self, file: str) -> None:
         """Hakee konfiguraatio tiedostosta kaikki viittausmuodot
 
         Template:
@@ -22,7 +23,7 @@ class ConfigurationRepository:
             ...
         """
 
-        content = toml.load("cite_types.toml")
+        content = toml.load(file)
 
         for typ, fields in content.items():
             self._cites[typ] = {}
@@ -31,7 +32,7 @@ class ConfigurationRepository:
                 boolean = values[1] == "True"
                 self._cites[typ][field] = (field_name, boolean)
 
-    def get_cites(self):
+    def get_cites(self) -> dict:
         """Palauta lähdeviittaus tyypit
         """
 
