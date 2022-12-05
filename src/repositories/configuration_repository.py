@@ -38,5 +38,26 @@ class ConfigurationRepository:
 
         return self._cites
 
+    def get_cite_types(self):
+        
+        cite_types = []
+
+        for keys in self.get_cites():
+            cite_types.append(keys)
+        
+        return cite_types
+
+    def get_fields(self, typ):
+        cites = self.get_cites()
+        required_fields = []
+        optional_fields = []
+
+        for key, value in cites[typ].items():
+            if value[1]:
+                required_fields.append((key, value[0]))
+            else:
+                optional_fields.append((key, value[0]))
+
+        return required_fields, optional_fields
 
 configuration_repository = ConfigurationRepository()
