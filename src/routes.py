@@ -21,7 +21,7 @@ def index():
     last_citation_rows = []
 
     for field_key, value in citation_service.get_last().items():
-        if field_key in ["type", "cite_key"]:
+        if field_key in ["type", "cite_key", "date"]:
             continue
         selostus_teksti = dict_fields[field_key][0]
 

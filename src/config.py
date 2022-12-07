@@ -5,7 +5,6 @@ dirname = os.path.dirname(__file__)
 
 try:
     load_dotenv(dotenv_path=os.path.join(dirname, '..', '.env'))
-    load_dotenv(dotenv_path=os.path.join(dirname, '..', 'secrets.env'))
 except FileNotFoundError:
     pass
 
