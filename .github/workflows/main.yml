@@ -27,6 +27,7 @@ jobs:
       - name: Coverage report to Codecov
         run: bash <(curl -s https://codecov.io/bash)
       - name: robot tests
-        run: robot src/tests
+        run: poetry run invoke start
+        run: poetry run robot src/tests
       - name: Lint
         run: poetry run pylint src
