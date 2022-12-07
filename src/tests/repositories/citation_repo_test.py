@@ -21,7 +21,8 @@ class TestCitationRepository(unittest.TestCase):
         )
 
         self.assertEqual(len(self.citation_repository.citations), 1)
-        self.assertEqual(self.citation_repository.citations[0]["cite_key"], "1")
+        self.assertEqual(
+            self.citation_repository.citations[0]["cite_key"], "1")
         self.assertEqual(
             self.citation_repository.citations[0]["title"], "Teeskentelyä")
 
@@ -74,7 +75,6 @@ class TestCitationRepository(unittest.TestCase):
         self.citation_repository.remove_citation(cite_key)
         self.assertEqual(len(citations), 1)
 
-        
     def test_remove_citation_that_does_not_exist(self):
         self.citation_repository.add_citation(
             citation={
@@ -85,6 +85,6 @@ class TestCitationRepository(unittest.TestCase):
                 "publisher": "Paras"
             }
         )
-        
+
         boolean = self.citation_repository.remove_citation("eiole")
         self.assertEqual(boolean, False)

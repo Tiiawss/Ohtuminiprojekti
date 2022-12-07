@@ -16,7 +16,8 @@ class BibTexService:
         self.bibtex = []
 
     def _replace_scandic_letters(self, word):
-        letters = {"ö": '{\\"{o}}', "Ö": '{\\"{O}}', "ä": '{\\"{a}}', "Ä": '{\\"{A}}', "å": '{\\r{a}}', "Å": '{\\r{A}}'}
+        letters = {"ö": '{\\"{o}}', "Ö": '{\\"{O}}', "ä": '{\\"{a}}',
+                   "Ä": '{\\"{A}}', "å": '{\\r{a}}', "Å": '{\\r{A}}'}
         for key, value in letters.items():
             word = word.replace(key, value)
         return word
@@ -31,31 +32,14 @@ class BibTexService:
             cite_list = []
             first_row = '@' + cite['type'] + '{' + cite['cite_key'] + ','
             cite_list.append(first_row)
-            lenght = len(cite.keys()) - 1
-            i = 1
             for key, value in cite.items():
                 if key in ['type', 'cite_key']:
                     continue
-                i += 1
-                if i == lenght:
-                    break
                 value = self._replace_scandic_letters(value)
                 row = f'    {key} = "{value}",'
                 cite_list.append(row)
-            row_values = list(cite.items())[-2]
-            row_values_1 = self._replace_scandic_letters(row_values[1])
-            row = f'    {row_values[0]} = "{row_values_1}"'
-            cite_list.append(row)
+            cite_list[-1] = cite_list[-1][:-1]
             cite_list.append('}')
-
-            # book_dict = {
-            #    "Citekey": citekey,
-            #    "Author": author,
-            #    "Title": title,
-            #    "Year": year,
-            #    "Publisher": publisher,
-            #    "Last": "}"
-            # }
 
             self.bibtex.append(cite_list)
 

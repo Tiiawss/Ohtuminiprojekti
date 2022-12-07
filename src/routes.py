@@ -12,9 +12,9 @@ def index():
 
     if not citation_service.get_last():
         return render_template("index.html",
-            last_citation_rows=None,
-            cite_key = None
-        )
+                               last_citation_rows=None,
+                               cite_key=None
+                               )
 
     cite_type = citation_service.get_last()["type"]
     dict_fields = configuration_repository.get_cites()[cite_type]
@@ -29,11 +29,10 @@ def index():
             f"{selostus_teksti}: {value}"
         )
 
-
     return render_template("index.html",
-        last_citation_rows=last_citation_rows,
-        cite_key = citation_service.get_last()["cite_key"]
-    )
+                           last_citation_rows=last_citation_rows,
+                           cite_key=citation_service.get_last()["cite_key"]
+                           )
 
 
 @app.route("/form", methods=["GET", "POST"])
