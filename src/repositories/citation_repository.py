@@ -44,13 +44,16 @@ class CitationRepository:
     """ Repository for saving bookreferences
     """
 
-    def __init__(self):
-        self.citations = []
-        client = MongoClient(MONGO_URL)
-        if True:
-            self._db = client["test"]
+    def __init__(self, test_environment: bool = False):
+        self._client = MongoClient(MONGO_URL)
+        if test_environment:
+            self._db = self._client["test"]
         else:
-            self._db = client["production"]
+            self._db = self._client["production"]
+
+    def move_to_tests(self):
+        """ change to test db """
+        self._db = self._client["test"]
 
     def add_citation(self, citation):
         """Save citation
@@ -81,7 +84,7 @@ class CitationRepository:
             citation = self.remove_unnecessary_fields(citation)
             return citation
         except Exception:
-            return False
+            return None
 
     def get_citation(self) -> list:
         """Returns all citations
@@ -105,16 +108,24 @@ class CitationRepository:
         Returns:
             bool
         """
+        deleted_count = 0
         try:
-            self._db["citations"].delete_one({"cite_key": cite_key})
-            return True
+            result = self._db["citations"].delete_one({"cite_key": cite_key})
+            deleted_count = result.deleted_count
         except Exception:
             return False
 
+        if deleted_count > 0:
+            return True
+        return False
+
     def remove_unnecessary_fields(self, citation):
         """ Remove fields that are not needed in application """
-        citation.pop("_id")
-        citation.pop("date")
+        try:
+            citation.pop("_id")
+            citation.pop("date")
+        except Exception:
+            pass
         return citation
 
 
