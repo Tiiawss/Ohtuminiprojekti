@@ -90,15 +90,23 @@ def create():
     return redirect("/form")
 
 
-@app.route("/all")
+@app.route("/all", methods=["GET", "POST"])
 def view_all_citations():
     """Näyttää kaikki lähdeviittauksen ihmisluettavassa muodossa
     """
-
+    if request.method == "GET":
+        return render_template(
+            "citations.html",
+            citations=citation_service.get_all(),
+            tags = citation_service.get_tags()
+        )
+    tag = request.form["tags"]
     return render_template(
-        "citations.html",
-        citations=citation_service.get_all()
-    )
+            "citations.html", 
+             citations=citation_service.get_citations_by_tag(tag),
+             tags = citation_service.get_tags(),
+             selected = tag
+             )
 
 
 @app.route("/remove", methods=["POST"])
