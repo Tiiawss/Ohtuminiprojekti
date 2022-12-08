@@ -116,7 +116,7 @@ def remove_citation():
 
     citation_key = request.form["id"]
     citation_service.remove_citation(citation_key)
-    return redirect("/")
+    return redirect("/all")
 
 
 @app.route("/bibtex")
