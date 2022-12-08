@@ -26,6 +26,8 @@ jobs:
         run: pip install poetry
       - name: Install dependencies
         run: poetry install
+      - name: Setup secret
+        run: echo ${{ secrets.SECRET_KEY }} >> src/secrets.env
       - name: Run tests
         run: poetry run coverage run --branch -m pytest
       - name: Coverage report
