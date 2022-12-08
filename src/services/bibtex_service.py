@@ -49,4 +49,5 @@ class BibTexService:
         Returns:
             _description_
         """
+
         return self.bibtex

@@ -9,3 +9,11 @@ report.html
 *selenium*
 *.swp
 *secrets*
+
+src/.dockerignore
+src/.fly.toml
+src/poetry.lock
+src/Procfile
+src/pyproject.toml
+src/fly.toml
+src/requirements.txt
