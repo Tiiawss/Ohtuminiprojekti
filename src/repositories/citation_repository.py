@@ -42,7 +42,8 @@ class CitationRepository:
     def get_last(self):
         """ Get citation with newest date """
         try:
-            citation = self._db["citations"].find({}).sort("date", -1).limit(1)[0]
+            citation = self._db["citations"].find(
+                {}).sort("date", -1).limit(1)[0]
             citation = self.remove_unnecessary_fields(citation)
             return citation
         except Exception:
@@ -95,23 +96,24 @@ class CitationRepository:
         """
 
         citations = self.get_citation()
-        tag_citations = [] 
+        tag_citations = []
         for citation in citations:
             tags = citation["tagit"].split(',')
             if tag in tags:
                 tag_citations.append(citation)
 
         return tag_citations
-    
+
     def get_tags(self):
         """ Get all citations """
         citations = self.get_citation()
-        all_tags = [] 
+        all_tags = []
         for citation in citations:
             tags = citation["tagit"].split(',')
             for tag in tags:
                 all_tags.append(tag)
 
         return all_tags
+
 
 citation_repository = CitationRepository()

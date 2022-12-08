@@ -98,15 +98,15 @@ def view_all_citations():
         return render_template(
             "citations.html",
             citations=citation_service.get_all(),
-            tags = citation_service.get_tags()
+            tags=citation_service.get_tags()
         )
     tag = request.form["tags"]
     return render_template(
-            "citations.html", 
-             citations=citation_service.get_citations_by_tag(tag),
-             tags = citation_service.get_tags(),
-             selected = tag
-             )
+        "citations.html",
+        citations=citation_service.get_citations_by_tag(tag),
+        tags=citation_service.get_tags(),
+        selected=tag
+    )
 
 
 @app.route("/remove", methods=["POST"])
@@ -132,11 +132,13 @@ def generate_bibtex():
 
     return render_template("bibtex.html", bibtex=bibtex)
 
+
 @app.route("/delete_all", methods=["POST"])
 def delete_all():
     """ Delete all citations """
     citation_service.delete_all()
     return redirect("/")
+
 
 @app.route("/use_test_db", methods=["POST"])
 def use_test_db():

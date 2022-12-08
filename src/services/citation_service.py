@@ -109,16 +109,18 @@ class CitationService:
         """
 
         return self.repo.remove_citation(cite_key)
-    
+
     def get_citations_by_tag(self, tag) -> list:
         """ Get all citations from db that are in a tag
 
         Returns:
             _description_
         """
-        
+
         return self.repo.get_citations_by_tag(tag)
-    
+
     def get_tags(self) -> list:
         return self.repo.get_tags()
+
+
 citation_service = CitationService(citation_repository)
