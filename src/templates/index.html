@@ -1,10 +1,8 @@
+{% extends "layout.html" %}
+{% block content %}
 <head>
     <title>Etusivu</title>
 </head>
-<h1>Lähdeviittaus kirja</h1>
-<a href="/form">Lisää tästä</a>
-<a href="/all">Katso kaikki</a>
-<a href="/bibtex">Muodosta BibTex</a>
 <h2> Edellinen lisäyksesi:</h2>
 {% if cite_key and last_citation_rows %}
     <p>Citekey: <span id="citekey">{{ cite_key }}</span></p>
@@ -12,5 +10,6 @@
         <p>{{row}}</p>
     {% endfor %}
 {% endif %}
+{% endblock %}
 
 
