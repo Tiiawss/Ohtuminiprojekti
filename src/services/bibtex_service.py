@@ -33,7 +33,7 @@ class BibTexService:
             first_row = '@' + cite['type'] + '{' + cite['cite_key'] + ','
             cite_list.append(first_row)
             for key, value in cite.items():
-                if key in ['type', 'cite_key']:
+                if key in ['type', 'cite_key', 'tagit']:
                     continue
                 value = self._replace_scandic_letters(value)
                 row = f'    {key} = "{value}",'
