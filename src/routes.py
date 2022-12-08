@@ -83,7 +83,7 @@ def create():
         field_input = request.form[key]
         if field_input:
             cite_values.append((key, field_input))
-    tags = request.form["Tagit"]
+    tags = request.form["tagit"]
     cite_values.append(("tagit", tags))
     if citation_service.save_citation(cite_values):
         return redirect("/")

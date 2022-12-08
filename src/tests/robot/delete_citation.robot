@@ -14,6 +14,7 @@ Delete Newest Citation
     Set Input Field  title  titteli
     Set Input Field  year  vuosi
     Set Input Field  publisher  julkaisija
+    Set Input Field  tagit  tagii
     Submit Form
 
     ${citekey}  Get Text  id:citekey
@@ -28,6 +29,7 @@ Delete Only Certain Citation
     Set Input Field  title  titteli
     Set Input Field  year  9000
     Set Input Field  publisher  julkaisija
+    Set Input Field  tagit  tagii
     Submit Form
     ${citekey_to_be_deleted}  Get Text  id:citekey
     Go To Form Page
@@ -35,6 +37,7 @@ Delete Only Certain Citation
     Set Input Field  title  titteli
     Set Input Field  year  2002
     Set Input Field  publisher  julkaisija
+    Set Input Field  tagit  tagii
     Submit Form
 
     ${citekey}  Get Text  id:citekey

@@ -20,13 +20,12 @@ Open And Configure Browser
     Set Selenium Speed  ${DELAY}
 
 Home Page Should Be Open
-    Title Should Be  Etusivu
-
+    Title Should Be  Bibtex sovellus
 Form Book Page Should Be Open
-    Title Should Be  Lisää Viite Book
+    Title Should Be  Bibtex sovellus - Lisää viite
 
 All Page Should Be Open
-    Title Should Be  Kaikki Viitteet
+    Title Should Be  Bibtex sovellus - Kaikki viitteet
 
 Bibtex Page Should Be Open
     Title Should Be  Bibtex
