@@ -2,7 +2,8 @@
 Resource  resource.robot
 Suite Setup  Open And Configure Browser
 Suite Teardown  Close Browser
-Test Setup  Go To Form Page
+Test Setup  Delete All Citations And Go To Form Page
+Test Teardown  Delete All Citations
 
 *** Test Cases ***
 Form Page Is Open

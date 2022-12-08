@@ -21,7 +21,7 @@ def index():
     last_citation_rows = []
 
     for field_key, value in citation_service.get_last().items():
-        if field_key in ["type", "cite_key"]:
+        if field_key in ["type", "cite_key", "date"]:
             continue
         if field_key == "tagit":
             last_citation_rows.append(
@@ -123,3 +123,14 @@ def generate_bibtex():
     bibtex = bibtex_service.get_bibtex()
 
     return render_template("bibtex.html", bibtex=bibtex)
+
+@app.route("/delete_all", methods=["POST"])
+def delete_all():
+    """ Delete all citations """
+    citation_service.delete_all()
+    return redirect("/")
+
+@app.route("/use_test_db", methods=["POST"])
+def use_test_db():
+    """ Use test db for tests """
+    citation_service.repo.move_to_tests()

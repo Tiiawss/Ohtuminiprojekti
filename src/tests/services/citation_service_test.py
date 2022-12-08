@@ -25,6 +25,11 @@ class StudCitationRepo:
             return True
         return False
 
+    def get_last(self):
+        if len(self.citations) > 0:
+            return self.citations[-1]
+        return None
+
 
 class TestCitationService(unittest.TestCase):
     def setUp(self):
