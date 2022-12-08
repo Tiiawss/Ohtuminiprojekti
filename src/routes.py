@@ -98,13 +98,16 @@ def view_all_citations():
         return render_template(
             "citations.html",
             citations=citation_service.get_all(),
+            citations_copy=citation_service.get_all(),
             tags=citation_service.get_tags()
         )
     tag = request.form["tags"]
     return render_template(
         "citations.html",
         citations=citation_service.get_citations_by_tag(tag),
+        citations_copy=citation_service.get_citations_by_tag(tag),
         tags=citation_service.get_tags(),
+        tag_copy=tag,
         selected=tag
     )
 
@@ -127,6 +130,25 @@ def generate_bibtex():
     bibtex_service = BibTexService()
 
     bibtex_service.turn_cites_to_bibtex()
+
+    bibtex = bibtex_service.get_bibtex()
+
+    return render_template("bibtex.html", bibtex=bibtex)
+
+
+@app.route("/bibtex_from_tag", methods=["POST"])
+def generate_bibtex_from_tag():
+    """ Muodostaa lähdeviittauksista bibtex muotoinen teksti tagien perusteella  """
+
+    bibtex_service = BibTexService()
+
+    tag = request.form["citations"]
+
+    if tag:
+        citations = citation_service.get_citations_by_tag(tag)
+        bibtex_service.turn_cites_to_bibtex(citations)
+    else:
+        bibtex_service.turn_cites_to_bibtex()
 
     bibtex = bibtex_service.get_bibtex()
 

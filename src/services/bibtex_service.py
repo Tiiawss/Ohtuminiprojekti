@@ -22,11 +22,12 @@ class BibTexService:
             word = word.replace(key, value)
         return word
 
-    def turn_cites_to_bibtex(self):
+    def turn_cites_to_bibtex(self, cites=None):
         """Turns citations to bibtex
         """
 
-        cites = self.citation_service.get_all()
+        if not cites:
+            cites = self.citation_service.get_all()
 
         for cite in cites:
             cite_list = []
@@ -40,7 +41,6 @@ class BibTexService:
                 cite_list.append(row)
             cite_list[-1] = cite_list[-1][:-1]
             cite_list.append('}')
-
             self.bibtex.append(cite_list)
 
     def get_bibtex(self):

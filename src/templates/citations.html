@@ -18,7 +18,11 @@
                 {% endif %}
             {% endfor %}
         </select>
-        <input type="submit" id="change_tag" value="Näytä tagilla">
+        <input type="submit" id="change_tag" value="Näytä tagilla">     
+    </form>
+    <form action="/bibtex_from_tag" method="POST">
+            <input type="hidden" id="citations" name="citations" value="{{ tag_copy }}">
+            <input type="submit" id="change_tag" value="Muodosta bibtex näistä lähteistä">
     </form>
         <ul>
             {% for citation in citations %}

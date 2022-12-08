@@ -4,6 +4,7 @@ import requests
 
 class AppLibrary:
     """ For robot tests """
+
     def __init__(self) -> None:
         self._base_url = "http://localhost:5000"
 
