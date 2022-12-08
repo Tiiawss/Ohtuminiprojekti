@@ -59,11 +59,29 @@ class CitationRepository:
             citation
         """
         citations = self._db["citations"]
-        citations.insert_one(citation)
+
+        try:
+            citations.insert_one(citation)
+            return True
+        except Exception:
+            return False
 
     def delete_all(self):
         """ Delete all citations from db """
-        return self._db["citations"].delete_many({}).deleted_count
+        try:
+            self._db["citations"].delete_many({})
+            return True
+        except Exception:
+            return False
+
+    def get_last(self):
+        """ Get citation with newest date """
+        try:
+            citation = self._db["citations"].find({}).sort("date", -1).limit(1)[0]
+            citation = self.remove_unnecessary_fields(citation)
+            return citation
+        except Exception:
+            return False
 
     def get_citation(self) -> list:
         """Returns all citations
@@ -74,14 +92,31 @@ class CitationRepository:
         cursor = self._db["citations"].find({})
         citations = []
         for citation in cursor:
-            citation.pop("_id")
+            citation = self.remove_unnecessary_fields(citation)
             citations.append(citation)
         return citations
 
     def remove_citation(self, cite_key: str):
-        """Removes one citation"""
-        removed = self._db["citations"].delete_one({"cite_key": cite_key})
-        print(removed)
-        return True
+        """Removes one citation
+
+        Args:
+            cite_key: str
+
+        Returns:
+            bool
+        """
+        try:
+            self._db["citations"].delete_one({"cite_key": cite_key})
+            return True
+        except Exception:
+            return False
+
+    def remove_unnecessary_fields(self, citation):
+        """ Remove fields that are not needed in application """
+        citation.pop("_id")
+        citation.pop("date")
+        return citation
+
+
 
 citation_repository = CitationRepository()
