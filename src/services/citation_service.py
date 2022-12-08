@@ -120,6 +120,12 @@ class CitationService:
         return self.repo.get_citations_by_tag(tag)
 
     def get_tags(self) -> list:
+        """ Get citation tags
+
+        Returns:
+            list of tags
+        """
+
         return self.repo.get_tags()
 
 
