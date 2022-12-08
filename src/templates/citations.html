@@ -1,10 +1,12 @@
+{% extends "layout.html" %}
+{% block content %}
 <!DOCTYPE html>
 <html>
     <head>
         <title>Kaikki Viitteet</title>
     </head>
     <body>
-        <h1>Kaikki viittaukset</h1>
+        <h2>Kaikki viittaukset</h2>
         <ul>
             {% for citation in citations %}
             <li>citekey: {{ citation.cite_key }} </li>
@@ -24,3 +26,4 @@
         </ul>
     </body>
 </html>
+{% endblock %}
