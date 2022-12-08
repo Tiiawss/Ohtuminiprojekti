@@ -79,7 +79,6 @@ class CitationService:
             cite_key_author,
             cite_key_year
         )
-
         self.repo.add_citation(citation_to_save)
         return True
 

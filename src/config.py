@@ -12,9 +12,9 @@ except FileNotFoundError:
 TOML_FILENAME = os.getenv('TOMLCONFIG') or 'cite_types.toml'
 
 try:
-     load_dotenv(dotenv_path=os.path.join(dirname, 'secrets.env'))
+    load_dotenv(dotenv_path=os.path.join(dirname, 'secrets.env'))
 except FileNotFoundError:
-     pass
+    pass
 
 
 MONGO_URL = os.getenv('MONGO_URL')

@@ -23,6 +23,11 @@ def index():
     for field_key, value in citation_service.get_last().items():
         if field_key in ["type", "cite_key"]:
             continue
+        if field_key == "tagit":
+            last_citation_rows.append(
+                f"Tagit: {value}"
+            )
+            continue
         selostus_teksti = dict_fields[field_key][0]
 
         last_citation_rows.append(
@@ -78,6 +83,8 @@ def create():
         field_input = request.form[key]
         if field_input:
             cite_values.append((key, field_input))
+    tags = request.form["Tagit"]
+    cite_values.append(("tagit", tags))
     if citation_service.save_citation(cite_values):
         return redirect("/")
     return redirect("/form")

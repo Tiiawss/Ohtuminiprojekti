@@ -26,6 +26,9 @@
         <label for="{{ field[0] }}">{{ field[1] }}</label>
         <input type="text", id="{{ field[0] }}" name="{{ field[0] }}">
         {% endfor %}
+        <p>Anna viitteelle tageja<p>
+        <label for="tag">Erottele eri tagit pilkulla</label>
+        <input type="text", id="tag" name="Tagit">
         <input type="hidden" name="selected" value="{{ selected }}">
         <input id="submit-button" type="submit" value="Luo viite">
     </form>
