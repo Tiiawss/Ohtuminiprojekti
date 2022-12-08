@@ -1,5 +1,6 @@
 *** Settings ***
 Library  SeleniumLibrary
+Library  ../../AppLibrary.py
 
 *** Variables ***
 ${SERVER}  localhost:5000
@@ -9,9 +10,11 @@ ${HOME URL}  http://${SERVER}
 ${FORM URL}  http://${SERVER}/form
 ${ALL URL}  http://${SERVER}/all
 ${BIBTEX URL}  http://${SERVER}/bibtex
+${DELETE_ALL URL}  http://${SERVER}/bibtex
 
 *** Keywords ***
 Open And Configure Browser
+    Use Test Db
     Open Browser  browser=${BROWSER}
     Maximize Browser Window
     Set Selenium Speed  ${DELAY}
@@ -46,3 +49,7 @@ Set Input Field
 
 Submit Form
     Click Button  Luo viite
+
+Delete All Citations And Go To Form Page
+    Delete All Citations
+    Go To  ${FORM URL}
