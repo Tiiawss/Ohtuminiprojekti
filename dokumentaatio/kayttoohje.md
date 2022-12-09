@@ -12,7 +12,7 @@ git clone https://github.com/Tiiawss/Ohtuminiprojekti.git
 
 ### Lähdeviittaustyypit
 
-Ohjelman ![src](../src) kansiosta löytyy tiedosto ![cite_tyoes.toml](../src/cite_types.toml). Tällä tiedostolla pystyy määrittelemään sovelluksen käyttämät tiedostotyypit seuraavasti
+Ohjelman [src](../src) kansiosta löytyy tiedosto [cite_types.toml](../src/cite_types.toml). Tällä tiedostolla pystyy määrittelemään sovelluksen käyttämät tiedostotyypit seuraavasti
 
 ```
 [Book] # Lähdeviittauksen nimi
@@ -27,7 +27,7 @@ ja viimeisenä Pakollinen vai ei, aseta "True" jos on, muuten ""
 
 ### Tietokanta
 
-Sovelluskäyttää MongoDB tietokantaa. Tämän käyttöä varten tulee luoda [MongoDB](https://www.mongodb.com) tietokanta ja tämän secret key pitää asettaa ![src](../src) kansioon tiedostoon _secrects.env_.
+Sovelluskäyttää MongoDB tietokantaa. Tämän käyttöä varten tulee luoda [MongoDB](https://www.mongodb.com) tietokanta ja tämän secret key pitää asettaa [src](../src) kansioon tiedostoon _secrets.env_.
 
 ## Ohjelman käynnistäminen
 
@@ -53,7 +53,7 @@ Ohjelma on myös internetissä osoitteessa [https://quiet-night-8665.fly.dev/](h
 
 Lähteen lisääminen onnistuu painamalla aloitussivulta _Lisää tästä_ -nappia, joka siirtää sovelluksen lähteen lisäys sivulle.
 
-Lähteen lisäyksessä ensimmäisenä on viitetyypin valinta. Kaikki viitetyypit on määritelty ![cite_tyoes.toml](../src/cite_types.toml) tiedostossa. Viitetyypin valitseminen vaihtaa täytettävät kentät kyseisen lähdeviiteen kentikiksi.
+Lähteen lisäyksessä ensimmäisenä on viitetyypin valinta. Kaikki viitetyypit on määritelty [cite_types.toml](../src/cite_types.toml) tiedostossa. Viitetyypin valitseminen vaihtaa täytettävät kentät kyseisen lähdeviiteen kentikiksi.
 
 Viitetyypillä on kolmea erilaista kenttää seuraavassa järjestyksessä:
 
