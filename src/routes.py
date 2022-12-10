@@ -44,28 +44,22 @@ def index():
 def form():
     """Avaa lomakkeen, johon täytetään lähdeviitaus
     """
-    cites = configuration_repository.get_cites()
-    cite_types = []
-    for keys in cites:
-        cite_types.append(keys)
-    required_fields = []
-    optional_fields = []
+    cite_types = configuration_repository.get_cite_types()
+    
     if request.method == "GET":
         typ = cite_types[0]
+
     else:
         typ = request.form.get("types")
-    for key, values in cites[typ].items():
-        if values[1]:
-            required_fields.append((key, values[0]))
-        else:
-            optional_fields.append((key, values[0]))
+
+    required_fields, optional_fields = configuration_repository.get_fields(typ)
+    
     return render_template("form.html",
                            types=cite_types,
                            required_fields=required_fields,
                            optional_fields=optional_fields,
                            selected=typ
                            )
-
 
 @app.route("/create", methods=["POST"])
 def create():
