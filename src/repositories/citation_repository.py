@@ -91,7 +91,7 @@ class CitationRepository:
             pass
         return citation
 
-    def get_citations_by_tag(self, tag):
+    def get_citations_by_tag(self, tag: str) -> list:
         """ Get all citations by a tag
         """
 
