@@ -45,7 +45,7 @@ def form():
     """Avaa lomakkeen, johon täytetään lähdeviitaus
     """
     cite_types = configuration_repository.get_cite_types()
-    
+
     if request.method == "GET":
         typ = cite_types[0]
 
@@ -53,13 +53,14 @@ def form():
         typ = request.form.get("types")
 
     required_fields, optional_fields = configuration_repository.get_fields(typ)
-    
+
     return render_template("form.html",
                            types=cite_types,
                            required_fields=required_fields,
                            optional_fields=optional_fields,
                            selected=typ
                            )
+
 
 @app.route("/create", methods=["POST"])
 def create():

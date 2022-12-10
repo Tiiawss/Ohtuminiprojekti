@@ -38,16 +38,25 @@ class ConfigurationRepository:
 
         return self._cites
 
-    def get_cite_types(self):
-        
+    def get_cite_types(self) -> list:
+        """Palauttaa lähdetyypit listana
+        """
         cite_types = []
 
         for keys in self.get_cites():
             cite_types.append(keys)
-        
+
         return cite_types
 
-    def get_fields(self, typ):
+    def get_fields(self, typ) -> tuple:
+        """Palauttaa required fields ja optional fields
+
+        Args:
+            typ eli tyyppi
+
+        Returns:
+            tuple: (list, list)
+        """
         cites = self.get_cites()
         required_fields = []
         optional_fields = []
@@ -59,5 +68,6 @@ class ConfigurationRepository:
                 optional_fields.append((key, value[0]))
 
         return required_fields, optional_fields
+
 
 configuration_repository = ConfigurationRepository()
