@@ -25,6 +25,11 @@ class StudCitationRepo:
             return True
         return False
 
+    def get_last(self):
+        if len(self.citations) > 0:
+            return self.citations[-1]
+        return None
+
 
 class TestCitationService(unittest.TestCase):
     def setUp(self):
@@ -33,10 +38,10 @@ class TestCitationService(unittest.TestCase):
     def test_saves_citation_correclty(self):
 
         re = self.citation_service.save_citation([
-        ("author", "tee"),
-        ("title", "teee"), 
-        ("year","2002"), 
-        ("publisher","jtn")
+            ("author", "tee"),
+            ("title", "teee"),
+            ("year", "2002"),
+            ("publisher", "jtn")
         ])
 
         citations = self.citation_service.get_all()
@@ -47,10 +52,10 @@ class TestCitationService(unittest.TestCase):
 
     def test_does_not_save_incorrect_citation(self):
         re = self.citation_service.save_citation([
-        ("author", ""),
-        ("title", "teee"),
-        ("year","2002"),
-        ("publisher","jtn")
+            ("author", ""),
+            ("title", "teee"),
+            ("year", "2002"),
+            ("publisher", "jtn")
         ])
 
         citations = self.citation_service.get_all()
@@ -62,9 +67,9 @@ class TestCitationService(unittest.TestCase):
     def test_missing_author_field(self):
 
         self.citation_service.save_citation([
-        ("title", "teee"),
-        ("year","2002"),
-        ("publisher","jtn")
+            ("title", "teee"),
+            ("year", "2002"),
+            ("publisher", "jtn")
         ])
         citation = self.citation_service.get_all()[0]
         self.assertEqual(citation["cite_key"], "noaut2002")
@@ -72,9 +77,9 @@ class TestCitationService(unittest.TestCase):
     def test_missing_year_field(self):
 
         self.citation_service.save_citation([
-        ("author", "teee"),
-        ("title", "tooo"),
-        ("publisher","jtn")
+            ("author", "teee"),
+            ("title", "tooo"),
+            ("publisher", "jtn")
         ])
         citation = self.citation_service.get_all()[0]
         self.assertEqual(citation["cite_key"], "teee420")
@@ -82,17 +87,17 @@ class TestCitationService(unittest.TestCase):
     def test_unique_citekey_proper_formatting(self):
 
         self.citation_service.save_citation([
-        ("author", "pekpekka"),
-        ("title", "teee"),
-        ("year","2002"),
-        ("publisher","jtn")
+            ("author", "pekpekka"),
+            ("title", "teee"),
+            ("year", "2002"),
+            ("publisher", "jtn")
         ])
 
         self.citation_service.save_citation([
-        ("author", "pekpekka"),
-        ("title", "teee"),
-        ("year","2002"),
-        ("publisher","jtn")
+            ("author", "pekpekka"),
+            ("title", "teee"),
+            ("year", "2002"),
+            ("publisher", "jtn")
         ])
 
         for citation in self.citation_service.get_all():
@@ -105,16 +110,16 @@ class TestCitationService(unittest.TestCase):
     def test_unique_really_unique(self):
 
         self.citation_service.save_citation([
-        ("author", "pekpekka"),
-        ("title", "teee"),
-        ("year","2002"),
-        ("publisher","jtn")
+            ("author", "pekpekka"),
+            ("title", "teee"),
+            ("year", "2002"),
+            ("publisher", "jtn")
         ])
         self.citation_service.save_citation([
-        ("author", "pekpekka"),
-        ("title", "teee"),
-        ("year","2002"),
-        ("publisher","jtn")
+            ("author", "pekpekka"),
+            ("title", "teee"),
+            ("year", "2002"),
+            ("publisher", "jtn")
         ])
         self.assertNotEqual(
             self.citation_service.get_all()[0]["cite_key"],
@@ -124,10 +129,10 @@ class TestCitationService(unittest.TestCase):
     def test_only_letters_to_citekey_from_author(self):
 
         self.citation_service.save_citation([
-        ("author", "pe1!3.,"),
-        ("title", "teee"),
-        ("year","2002"),
-        ("publisher","jtn")
+            ("author", "pe1!3.,"),
+            ("title", "teee"),
+            ("year", "2002"),
+            ("publisher", "jtn")
         ])
         cite_key = self.citation_service.get_all()[0]["cite_key"]
         self.assertEqual(cite_key, "pe2002")
@@ -135,10 +140,10 @@ class TestCitationService(unittest.TestCase):
     def test_only_digits_to_citekey_from_year(self):
 
         self.citation_service.save_citation([
-        ("author", "pe1!3.,"),
-        ("title", "teee"),
-        ("year","2002 -- 2004"),
-        ("publisher","jtn")
+            ("author", "pe1!3.,"),
+            ("title", "teee"),
+            ("year", "2002 -- 2004"),
+            ("publisher", "jtn")
         ])
         cite_key = self.citation_service.get_all()[0]["cite_key"]
         self.assertEqual(cite_key, "pe2002")
@@ -146,16 +151,16 @@ class TestCitationService(unittest.TestCase):
     def test_get_last(self):
 
         self.citation_service.save_citation([
-        ("author", "pekpekka"),
-        ("title", "teee"),
-        ("year","2002"),
-        ("publisher","jtn")
+            ("author", "pekpekka"),
+            ("title", "teee"),
+            ("year", "2002"),
+            ("publisher", "jtn")
         ])
         self.citation_service.save_citation([
-        ("author", "pekpekka2"),
-        ("title", "teee"),
-        ("year","2002"),
-        ("publisher","jtn")
+            ("author", "pekpekka2"),
+            ("title", "teee"),
+            ("year", "2002"),
+            ("publisher", "jtn")
         ])
 
         citation = self.citation_service.get_last()
@@ -173,16 +178,16 @@ class TestCitationService(unittest.TestCase):
     def test_remove_citation(self):
 
         self.citation_service.save_citation([
-        ("author", "pekpekka2"),
-        ("title", "teee"),
-        ("year","2002"),
-        ("publisher","jtn")
+            ("author", "pekpekka2"),
+            ("title", "teee"),
+            ("year", "2002"),
+            ("publisher", "jtn")
         ])
         self.citation_service.save_citation([
-        ("author", "pekpekka1"),
-        ("title", "teee"),
-        ("year","2002"),
-        ("publisher","jtn")
+            ("author", "pekpekka1"),
+            ("title", "teee"),
+            ("year", "2002"),
+            ("publisher", "jtn")
         ])
 
         citekey = self.citation_service.get_all()[0]['cite_key']

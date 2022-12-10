@@ -15,41 +15,32 @@ class BibTexService:
         self.citation_service = citation_service
         self.bibtex = []
 
-    def turn_cites_to_bibtex(self):
+    def _replace_scandic_letters(self, word):
+        letters = {"ö": '{\\"{o}}', "Ö": '{\\"{O}}', "ä": '{\\"{a}}',
+                   "Ä": '{\\"{A}}', "å": '{\\r{a}}', "Å": '{\\r{A}}'}
+        for key, value in letters.items():
+            word = word.replace(key, value)
+        return word
+
+    def turn_cites_to_bibtex(self, cites=None):
         """Turns citations to bibtex
         """
 
-        cites = self.citation_service.get_all()
+        if not cites:
+            cites = self.citation_service.get_all()
 
-        print(cites)
         for cite in cites:
             cite_list = []
             first_row = '@' + cite['type'] + '{' + cite['cite_key'] + ','
             cite_list.append(first_row)
-            lenght = len(cite.keys()) - 1
-            i = 1
             for key, value in cite.items():
-                if key in ['type', 'cite_key']:
+                if key in ['type', 'cite_key', 'tagit']:
                     continue
-                i += 1
-                if i == lenght:
-                    break
+                value = self._replace_scandic_letters(value)
                 row = f'    {key} = "{value}",'
                 cite_list.append(row)
-            row_values = list(cite.items())[-2]
-            row = f'    {row_values[0]} = "{row_values[1]}"'
-            cite_list.append(row)
+            cite_list[-1] = cite_list[-1][:-1]
             cite_list.append('}')
-
-            # book_dict = {
-            #    "Citekey": citekey,
-            #    "Author": author,
-            #    "Title": title,
-            #    "Year": year,
-            #    "Publisher": publisher,
-            #    "Last": "}"
-            # }
-
             self.bibtex.append(cite_list)
 
     def get_bibtex(self):
@@ -58,4 +49,5 @@ class BibTexService:
         Returns:
             _description_
         """
+
         return self.bibtex

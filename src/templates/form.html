@@ -1,6 +1,8 @@
+{% extends "layout.html" %}
 <head>
-    <title>Lisää Viite {{ types[0] }}</title>
+    <title>{% block title %} - Lisää viite {% endblock %}</title>
 </head>
+{% block content %}
 <body>
     <form action="/form" method="POST">
         <label for="types">Valitse viitetyyppi:</label>
@@ -26,6 +28,9 @@
         <label for="{{ field[0] }}">{{ field[1] }}</label>
         <input type="text", id="{{ field[0] }}" name="{{ field[0] }}">
         {% endfor %}
+        <p>Anna viitteelle tageja<p>
+        <label for="tagit">Erottele eri tagit pilkulla</label>
+        <input type="text", id="tagit" name="tagit">
         <input type="hidden" name="selected" value="{{ selected }}">
         <input id="submit-button" type="submit" value="Luo viite">
     </form>
@@ -42,3 +47,4 @@
         }
     </style>
 </body>
+{% endblock %}

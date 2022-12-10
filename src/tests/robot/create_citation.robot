@@ -2,7 +2,9 @@
 Resource  resource.robot
 Suite Setup  Open And Configure Browser
 Suite Teardown  Close Browser
-Test Setup  Go To Form Page
+Test Setup  Delete All Citations And Go To Form Page
+Test Teardown  Delete All Citations
+
 
 
 *** Test Cases ***
@@ -14,6 +16,7 @@ Create Book With Correct Values
     Set Input Field  title  titteli
     Set Input Field  year  vuosi
     Set Input Field  publisher  julkaisija
+    Set Input Field  tagit  tagii
     Submit Form
     Home Page Should Be Open
 
@@ -22,6 +25,7 @@ Show Last Citation In Home Page
     Set Input Field  title  titteli
     Set Input Field  year  vuosi
     Set Input Field  publisher  julkaisija
+    Set Input Field  tagit  tagii
     Submit Form
     Page Should Contain  matti
     Page Should Contain  titteli
@@ -33,6 +37,7 @@ Last Book Is In All
     Set Input Field  title  titteli
     Set Input Field  year  1234
     Set Input Field  publisher  julkaisija
+    Set Input Field  tagit  tagii
     Submit Form
 
     Home Page Should Be Open
@@ -53,6 +58,7 @@ Create Book With Missing Author
     Set Input Field  title  titteli
     Set Input Field  year  vuosi
     Set Input Field  publisher  julkaisija
+    Set Input Field  tagit  tagii
     Submit Form
     Form Book Page Should Be Open
 
@@ -66,6 +72,7 @@ Create Article With Required Values
     Set Input Field  title  titteli
     Set Input Field  journal  journali
     Set Input Field  year  2922
+    Set Input Field  tagit  tagii
     Submit Form
     Home Page Should Be Open
     ${citekey}  Get Text  id:citekey
@@ -91,6 +98,7 @@ Create Article With Optional Values
     Set Input Field  pages  111
     Set Input Field  month  13
     Set Input Field  number  000
+    Set Input Field  tagit  tagii
 
     Submit Form
     Home Page Should Be Open
@@ -123,6 +131,7 @@ Created Citation In Bibtex
     Set Input Field  title  titteli
     Set Input Field  year  1234
     Set Input Field  publisher  julkaisija
+    Set Input Field  tagit  tagii
     Submit Form
 
     Home Page Should Be Open

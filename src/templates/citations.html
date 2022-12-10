@@ -1,10 +1,29 @@
+{% extends "layout.html" %}
+<head>
+    <title>{% block title %} - Kaikki viitteet {% endblock %}</title>
+</head>
+{% block content %}
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Kaikki Viitteet</title>
-    </head>
     <body>
-        <h1>Kaikki viittaukset</h1>
+        <h2>Kaikki viittaukset</h2>
+        <form action="/all" method="POST">
+        <label for="tags">Valitse tagi:</label>
+        <select name="tags">
+            {% for tag in tags %}
+                {% if tag == selected %}
+                    <option value="{{ tag }}" selected>{{ tag }}</option>
+                {% else %}
+                    <option value="{{ tag }}">{{ tag }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <input type="submit" id="change_tag" value="Näytä tagilla">     
+    </form>
+    <form action="/bibtex_from_tag" method="POST">
+            <input type="hidden" id="citations" name="citations" value="{{ tag_copy }}">
+            <input type="submit" id="change_tag" value="Muodosta bibtex näistä lähteistä">
+    </form>
         <ul>
             {% for citation in citations %}
             <li>citekey: {{ citation.cite_key }} </li>
@@ -24,3 +43,4 @@
         </ul>
     </body>
 </html>
+{% endblock %}

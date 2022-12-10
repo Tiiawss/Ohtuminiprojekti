@@ -1,5 +1,6 @@
 import random
 import string
+import datetime
 from repositories.citation_repository import citation_repository
 
 
@@ -80,6 +81,7 @@ class CitationService:
             cite_key_year
         )
 
+        citation_to_save["date"] = datetime.datetime.now()
         self.repo.add_citation(citation_to_save)
         return True
 
@@ -90,10 +92,11 @@ class CitationService:
     def get_last(self):
         """ Return last element of citations
         """
-        citations = self.repo.get_citation()
-        if len(citations) > 0:
-            return citations[-1]
-        return None
+        return self.repo.get_last()
+
+    def delete_all(self):
+        """ Delete all citations from db. True for success else False"""
+        return self.repo.delete_all()
 
     def remove_citation(self, cite_key: str) -> bool:
         """Remove citation. True for success false for fail.
@@ -106,6 +109,24 @@ class CitationService:
         """
 
         return self.repo.remove_citation(cite_key)
+
+    def get_citations_by_tag(self, tag) -> list:
+        """ Get all citations from db that are in a tag
+
+        Returns:
+            _description_
+        """
+
+        return self.repo.get_citations_by_tag(tag)
+
+    def get_tags(self) -> list:
+        """ Get citation tags
+
+        Returns:
+            list of tags
+        """
+
+        return self.repo.get_tags()
 
 
 citation_service = CitationService(citation_repository)
