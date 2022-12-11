@@ -87,7 +87,7 @@ class CitationService:
 
     def get_all(self):
         """ Return list of all citations """
-        return self.repo.get_citation()
+        return self.repo.get_all()
 
     def get_last(self):
         """ Return last element of citations
