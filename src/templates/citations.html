@@ -29,7 +29,7 @@
             <li>citekey: {{ citation.cite_key }} </li>
             <form action="/remove" method="POST">
                     <input type="hidden" name="id" value="{{ citation.cite_key }}">
-                    <input type="submit" id="remove-{{ citation.cite_key }}" value="Poista viittaus">
+                    <input type="submit" id="remove-{{ citation.cite_key }}" value="Poista viittaus" class="rmBtn">
                 </form>
             <ul>
                 {% for key, value in citation.items() %}
