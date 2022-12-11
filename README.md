@@ -18,5 +18,3 @@ Projektin Backlogi:
 ![Käyttöohje](dokumentaatio/kayttoohje.md)
 
 
-
-
