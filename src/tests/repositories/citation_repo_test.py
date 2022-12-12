@@ -32,31 +32,33 @@ class TestCitationRepository(unittest.TestCase):
         self.assertEqual(all_citations[0]["title"], "Teeskentelyä")
 
     def test_return_citations_correctly(self):
-        self.citation_repository.add_citation(
-            citation={
+        test_citations = [
+            {
                 "type": "Book",
                 "cite_key": "1",
                 "author": "Tee",
                 "title": "Teeskentelyä",
                 "year": "2022",
-                "publisher": "Paras"
-            }
-        )
-        self.citation_repository.add_citation(
-            citation={
+                "publisher": "Paras",
+                "tagit": "moi"
+            }, {
                 "type": "Book",
                 "cite_key": "2",
                 "author": "Tee",
                 "title": "Teeskentelyä2",
                 "year": "2022",
-                "publisher": "Paras"
+                "publisher": "Paras",
+                "tagit": "moi,hei,bye"
             }
-        )
+        ]
+        for test_citation in test_citations:
+            self.citation_repository.add_citation(test_citation.copy())
 
-        citations = self.citation_repository.get_citation()
-
-        self.assertEqual(len(citations), 2)
-        self.assertEqual(citations[0]["cite_key"], "1")
+        for citation in self.citation_repository.get_citation():
+            self.assertEqual(
+                citation in test_citations,
+                True
+            )
 
     def test_remove_citations(self):
         self.citation_repository.add_citation(
