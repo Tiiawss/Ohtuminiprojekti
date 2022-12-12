@@ -137,7 +137,7 @@ class TestCitationRepository(unittest.TestCase):
         }
         ])
 
-    def test_get_tags(self):
+    def test_get_tags_finds_multiple(self):
         for citation in self.get_tag_test_citations():
             self.citation_repository.add_citation(citation)
         tagit = [tagi["tagit"]
@@ -147,6 +147,12 @@ class TestCitationRepository(unittest.TestCase):
             all((tagi in self.citation_repository.get_tags())
                 for tagi in tagit),
             True
+        )
+
+    def test_get_tags_finds_none(self):
+        self.assertEqual(
+            self.citation_repository.get_tags(),
+            []
         )
 
     def test_get_citation_by_tag(self):
