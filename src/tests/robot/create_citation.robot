@@ -143,3 +143,21 @@ Created Citation In Bibtex
     Go To Bibtex Page
 
     Page Should Contain  @Book{myy1234,
+
+Created Citation In Bibtex by tag
+    Set Input Field  author  myy
+    Set Input Field  title  titteli
+    Set Input Field  year  1234
+    Set Input Field  publisher  julkaisija
+    Set Input Field  tagit  tagii,toine_tagii
+    Submit Form
+
+    Home Page Should Be Open
+    ${citekey}  Get Text  id:citekey
+    Go To All Page
+    Select From List By Label  name:tags  toine_tagii
+    Click Button  Näytä tagilla
+    Click Button  Muodosta bibtex näistä lähteistä
+    Page Should Contain  @Book{myy1234,
+
+
