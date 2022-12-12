@@ -162,3 +162,4 @@ def delete_all():
 def use_test_db():
     """ Use test db for tests """
     citation_service.repo.move_to_tests()
+    return redirect("/")
