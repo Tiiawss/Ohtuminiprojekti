@@ -1,6 +1,5 @@
 import unittest
 from repositories.citation_repository import citation_repository
-from time import sleep
 from datetime import datetime
 
 
