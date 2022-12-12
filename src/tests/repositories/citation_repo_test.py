@@ -8,24 +8,6 @@ class TestCitationRepository(unittest.TestCase):
         self.citation_repository = citation_repository
         self.citation_repository.move_to_tests()
         self.citation_repository.delete_all()
-        self.tag_test_citations = ([{
-            "type": "Book",
-            "cite_key": "1",
-            "author": "Tee",
-            "title": "Teeskentelyä",
-            "year": "2022",
-            "publisher": "Paras",
-            "tagit": "testi"
-        }, {
-            "type": "Book",
-            "cite_key": "2",
-            "author": "Tee",
-            "title": "Teeskentelyä2",
-            "year": "2022",
-            "publisher": "Paras",
-            "tagit": "testi1"
-        }
-        ])
 
     def tearDown(self) -> None:
         self.citation_repository.delete_all()
