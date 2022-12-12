@@ -35,7 +35,9 @@
                 {% for key, value in citation.items() %}
                 
                     {% if key != "cite_key" %}
+                        <div></div>
                         <li id="{{ citation.cite_key }}-{{key}}">{{key}}: {{ value }}</li>
+                        
                     {% endif %}
                 {% endfor %}
             </ul>
