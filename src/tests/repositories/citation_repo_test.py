@@ -1,5 +1,7 @@
 import unittest
 from repositories.citation_repository import citation_repository
+from time import sleep
+from datetime import datetime
 
 
 class TestCitationRepository(unittest.TestCase):
@@ -117,7 +119,7 @@ class TestCitationRepository(unittest.TestCase):
         boolean = self.citation_repository.remove_citation("eiole")
         self.assertEqual(boolean, False)
 
-    def get_tag_test_citations(self):
+    def get_test_citations(self):
         return ([{
             "type": "Book",
             "cite_key": "1",
@@ -138,7 +140,7 @@ class TestCitationRepository(unittest.TestCase):
         ])
 
     def test_get_tags_finds_multiple(self):
-        for citation in self.get_tag_test_citations():
+        for citation in self.get_test_citations():
             self.citation_repository.add_citation(citation)
         tagit = [tagi["tagit"]
                  for tagi in self.citation_repository.get_citation()]
@@ -156,9 +158,39 @@ class TestCitationRepository(unittest.TestCase):
         )
 
     def test_get_citation_by_tag(self):
-        for citation in self.get_tag_test_citations():
+        for citation in self.get_test_citations():
             self.citation_repository.add_citation(citation)
         self.assertEqual(
-            self.get_tag_test_citations()[:1],
+            self.get_test_citations()[:1],
             self.citation_repository.get_citations_by_tag("testi")
+        )
+
+    def test_get_last_citation_multiple(self):
+        """
+        Huom pitää lisätä datetime.now(), muuten .get_last ei toimi
+        Huom citation_repository.add_citation() muokkaa sille annettua oliota
+             sen vuoksi se haetaan uudestaan metodilta Equal checkiä varten!
+        """
+        for i in range(len(self.get_test_citations())):
+            citation_to_add = self.get_test_citations()[i]
+            citation_to_add["date"] = datetime.now()
+            self.citation_repository.add_citation(
+                citation_to_add
+            )
+            self.assertEqual(
+                self.citation_repository.get_last(),
+                self.get_test_citations()[i]
+            )
+
+    def test_get_last_citation_single(self):
+        self.citation_repository.add_citation(self.get_test_citations()[1])
+        self.assertEqual(
+            self.citation_repository.get_last(),
+            self.get_test_citations()[1]
+        )
+
+    def test_get_last_citation_none(self):
+        self.assertEqual(
+            self.citation_repository.get_last(),
+            None
         )
