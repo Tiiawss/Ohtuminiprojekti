@@ -17,8 +17,8 @@ Projektin Backlogi:
 
 ## Dokumentaatio
 
-![Käyttöohje](dokumentaatio/kayttoohje.md)
-![Loppuraportti](dokumentaatio/raportti.md)
+- ![Käyttöohje](dokumentaatio/kayttoohje.md)
+- ![Loppuraportti](dokumentaatio/raportti.md)
 
 
 
