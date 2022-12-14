@@ -2,6 +2,8 @@
 ## Ohtuminiprojekti 2022
 Tämä projekti on Helsingin yliopiston kurssia _ohjelmistotuotanto_ varten.
 
+Ohjelma on myös internetissä osoitteessa [https://quiet-night-8665.fly.dev/](https://quiet-night-8665.fly.dev/)
+
 Definition of done user storyille:
 - Hyväksymiskriteerien perusteella tehdyt yksikkö testit menevät läpi
 - Käyttäjä pystyy käyttämään kirjattujen hyväksymiskriteerien puitteissa
