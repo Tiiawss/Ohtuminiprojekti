@@ -49,7 +49,7 @@ class CitationRepository:
         except Exception:
             return None
 
-    def get_citation(self) -> list:
+    def get_all(self) -> list:
         """Returns all citations
 
         Returns:

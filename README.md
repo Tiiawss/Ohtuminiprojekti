@@ -21,4 +21,3 @@ Projektin Backlogi:
 - ![Loppuraportti](dokumentaatio/raportti.md)
 
 
-
