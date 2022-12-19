@@ -51,3 +51,18 @@ form {
     background-color: rgb(34, 85, 45);
     transition: 0.2s;
   }
+
+.rmBtn {
+    background-color: rgb(199, 0, 0);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.2s;
+}
