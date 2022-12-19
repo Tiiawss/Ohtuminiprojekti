@@ -89,19 +89,20 @@ def create():
 def view_all_citations():
     """Näyttää kaikki lähdeviittauksen ihmisluettavassa muodossa
     """
+    tags_without_dublicates = sorted([*set(citation_service.get_tags())])
     if request.method == "GET":
         return render_template(
             "citations.html",
             citations=citation_service.get_all(),
             citations_copy=citation_service.get_all(),
-            tags=citation_service.get_tags()
+            tags=tags_without_dublicates
         )
     tag = request.form["tags"]
     return render_template(
         "citations.html",
         citations=citation_service.get_citations_by_tag(tag),
         citations_copy=citation_service.get_citations_by_tag(tag),
-        tags=citation_service.get_tags(),
+        tags=tags_without_dublicates,
         tag_copy=tag,
         selected=tag
     )
@@ -161,3 +162,4 @@ def delete_all():
 def use_test_db():
     """ Use test db for tests """
     citation_service.repo.move_to_tests()
+    return redirect("/")

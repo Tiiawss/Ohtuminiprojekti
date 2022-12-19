@@ -1,18 +1,20 @@
 {% extends "layout.html" %}
+
 <head>
     <title>{% block title %} - Lisää viite {% endblock %}</title>
 </head>
 {% block content %}
+
 <body>
     <form action="/form" method="POST">
         <label for="types">Valitse viitetyyppi:</label>
         <select name="types" onchange="this.form.submit()">
             {% for type in types %}
-                {% if type == selected %}
-                    <option value="{{ type }}" selected>{{ type }}</option>
-                {% else %}
-                    <option value="{{ type }}">{{ type }}</option>
-                {% endif %}
+            {% if type == selected %}
+            <option value="{{ type }}" selected>{{ type }}</option>
+            {% else %}
+            <option value="{{ type }}">{{ type }}</option>
+            {% endif %}
             {% endfor %}
         </select>
     </form>
@@ -21,18 +23,19 @@
         <p>Pakolliset kentät</p>
         {% for field in required_fields %}
         <label for="{{ field[0] }}">{{ field[1] }}</label>
-        <input type="text", id="{{ field[0] }}" name="{{ field[0] }}" placeholder="pakollinen kenttä" required>
+        <input type="text" , id="{{ field[0] }}" name="{{ field[0] }}" placeholder="pakollinen kenttä" required>
         {% endfor %}
         <p>Valinnaiset kentät</p>
         {% for field in optional_fields %}
         <label for="{{ field[0] }}">{{ field[1] }}</label>
-        <input type="text", id="{{ field[0] }}" name="{{ field[0] }}">
+        <input type="text" , id="{{ field[0] }}" name="{{ field[0] }}">
         {% endfor %}
-        <p>Anna viitteelle tageja<p>
-        <label for="tagit">Erottele eri tagit pilkulla</label>
-        <input type="text", id="tagit" name="tagit">
-        <input type="hidden" name="selected" value="{{ selected }}">
-        <input id="submit-button" type="submit" value="Luo viite">
+        <p>Anna viitteelle tageja
+        <p>
+            <label for="tagit">Erottele eri tagit pilkulla</label>
+            <input type="text" , id="tagit" name="tagit" placeholder="pakollinen kenttä" required>
+            <input type="hidden" name="selected" value="{{ selected }}">
+            <input id="submit-button" type="submit" value="Luo viite">
     </form>
 
     <style>

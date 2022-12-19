@@ -88,6 +88,8 @@ Create Article With Required Values
     Should Be Equal  ${author}  year: 2922
     ${author}  Get Text  id:${citekey}-journal
     Should Be Equal  ${author}  journal: journali
+    ${tagit}  Get Text  id:${citekey}-tagit
+    Should Be Equal  ${tagit}  tagit: tagii
 
 Create Article With Optional Values
     Select From List By Index  name:types  1
@@ -98,7 +100,7 @@ Create Article With Optional Values
     Set Input Field  pages  111
     Set Input Field  month  13
     Set Input Field  number  000
-    Set Input Field  tagit  tagii
+    Set Input Field  tagit  tagii,toinentagii
 
     Submit Form
     Home Page Should Be Open
@@ -121,6 +123,8 @@ Create Article With Optional Values
     Should Be Equal  ${month}  month: 13
     ${number}  Get Text  id:${citekey}-number
     Should Be Equal  ${number}  number: 000
+    ${tagit}  Get Text  id:${citekey}-tagit
+    Should Be Equal  ${tagit}  tagit: tagii,toinentagii
 
     Page Should Not Contain Element  id:${citekey}-volume
     Page Should Not Contain Element  id:${citekey}-note
@@ -139,3 +143,21 @@ Created Citation In Bibtex
     Go To Bibtex Page
 
     Page Should Contain  @Book{myy1234,
+
+Created Citation In Bibtex by tag
+    Set Input Field  author  myy
+    Set Input Field  title  titteli
+    Set Input Field  year  1234
+    Set Input Field  publisher  julkaisija
+    Set Input Field  tagit  tagii,toine_tagii
+    Submit Form
+
+    Home Page Should Be Open
+    ${citekey}  Get Text  id:citekey
+    Go To All Page
+    Select From List By Label  name:tags  toine_tagii
+    Click Button  Näytä tagilla
+    Click Button  Muodosta bibtex näistä lähteistä
+    Page Should Contain  @Book{myy1234,
+
+

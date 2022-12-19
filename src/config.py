@@ -9,7 +9,9 @@ try:
 except FileNotFoundError:
     pass
 
-TOML_FILENAME = os.getenv('TOMLCONFIG') or 'cite_types.toml'
-
+if os.path.exists(os.getenv("TOMLCONFIG")):
+    TOML_FILENAME = os.getenv('TOMLCONFIG')
+else:
+    TOML_FILENAME = dotenv_path=os.path.join('src', os.getenv('TOMLCONFIG'))
 
 MONGO_URL = os.getenv('MONGO_URL')
